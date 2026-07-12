@@ -21,5 +21,6 @@
 | パス | 内容 |
 |---|---|
 | [docs/concept.md](docs/concept.md) | コンセプト・決定事項・残論点 |
+| docs/experiments/ | 企画検証の実証ログ(競合・データ収集の実験結果) |
 | docs/adr/ | Architecture Decision Records(今後追加) |
 | specs/ | 機能仕様(今後追加) |
