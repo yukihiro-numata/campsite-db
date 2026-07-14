@@ -6,21 +6,9 @@
 (地面の種類、サイトの広さ、静かさ、トイレのきれいさ 等)が構造化されていない。
 本プロジェクトは、それらを構造化データとして検索できるサービスを目指す。
 
-## ステータス
-
-コンセプト策定フェーズ。詳細は [docs/concept.md](docs/concept.md) を参照。
-
-## 開発方針
-
-- 個人開発として継続できる規模を最優先
-- Claude Code をメイン開発者として活用(Issue 駆動)
-- ドキュメント・仕様・判断理由(ADR)をすべてこのリポジトリで Git 管理
-
 ## ドキュメント
 
 | パス | 内容 |
 |---|---|
-| [docs/concept.md](docs/concept.md) | コンセプト・決定事項・残論点 |
-| docs/experiments/ | 企画検証の実証ログ(競合・データ収集の実験結果) |
-| docs/adr/ | Architecture Decision Records(今後追加) |
-| specs/ | 機能仕様(今後追加) |
+| [docs/concept.md](docs/concept.md) | コンセプト・方針・決定事項・残論点 |
+| [docs/experiments/](docs/experiments/) | 企画検証の実証ログ |
