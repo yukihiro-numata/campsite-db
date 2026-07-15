@@ -11,5 +11,6 @@
 | パス | 内容 |
 |---|---|
 | [docs/concept.md](docs/concept.md) | コンセプト・方針・決定事項・残論点 |
-| [docs/design.md](docs/design.md) | MVP スコープと技術方針 |
+| [docs/mvp.md](docs/mvp.md) | MVP スコープ(何を作るか) |
+| [docs/tech.md](docs/tech.md) | 技術方針(何で作るか) |
 | [docs/experiments/](docs/experiments/) | 企画検証の実証ログ |
