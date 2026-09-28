@@ -1,0 +1,157 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { campsites, findCampsite } from "@/data/campsites";
+import type { Area, CarAccess, Fact, GroupPolicy, Source } from "@/data/types";
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return campsites.map((c) => ({ id: String(c.id) }));
+}
+
+function getCampsite(id: string) {
+  const campsite = findCampsite(Number(id));
+  if (!campsite) notFound();
+  return campsite;
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/campsites/[id]">): Promise<Metadata> {
+  const { id } = await params;
+  return { title: getCampsite(id).name };
+}
+
+const sourceKindLabel: Record<Source["kind"], string> = {
+  official: "公式サイト",
+  booking: "予約サイト",
+  calculated: "計算",
+};
+
+const carAccessLabel: Record<CarAccess, string> = {
+  inside: "区画内に駐車",
+  front: "区画の前に駐車",
+  none: "横付けできない",
+};
+
+const groupLabel: Record<GroupPolicy["allowed"], string> = {
+  yes: "可",
+  conditional: "条件付き",
+  no: "不可",
+};
+
+const formatArea = (a: Area) =>
+  `約${a.min === a.max ? a.min : `${a.min}〜${a.max}`}㎡${a.note ? `(${a.note})` : ""}`;
+
+const formatDistance = (m: number | null) =>
+  m === null ? "1,500m 以内になし" : `約${m.toLocaleString("ja-JP")}m`;
+
+function FactRow<T>({
+  label,
+  fact,
+  format,
+}: {
+  label: string;
+  fact: Fact<T>;
+  format: (value: T) => string;
+}) {
+  return (
+    <div className="border-b py-2">
+      <dt className="text-sm text-gray-600">{label}</dt>
+      <dd>
+        {fact.status === "known" ? format(fact.value) : "未調査"}
+        {fact.status === "known" && (
+          <p className="text-xs text-gray-500">
+            <a href={fact.source.url} className="underline">
+              {sourceKindLabel[fact.source.kind]}
+            </a>
+            {fact.source.note && ` ${fact.source.note}`}
+            (調べた日: {fact.source.checkedOn})
+          </p>
+        )}
+      </dd>
+    </div>
+  );
+}
+
+export default async function Page({ params }: PageProps<"/campsites/[id]">) {
+  const { id } = await params;
+  const c = getCampsite(id);
+
+  return (
+    <main className="mx-auto w-full max-w-2xl p-4">
+      <h1 className="text-xl font-semibold">{c.name}</h1>
+
+      <h2 className="mt-6 font-semibold">基本情報</h2>
+      <dl>
+        <FactRow
+          label="都心からの所要時間"
+          fact={c.travelMinutes}
+          format={(v) => `約${v}分`}
+        />
+        <FactRow
+          label="静粛時間"
+          fact={c.quietHours}
+          format={(v) => `${v.start}〜${v.end}`}
+        />
+        <FactRow
+          label="グループ利用"
+          fact={c.groupPolicy}
+          format={(v) =>
+            `${groupLabel[v.allowed]}${v.note ? `(${v.note})` : ""}`
+          }
+        />
+        <FactRow
+          label="高速道路まで"
+          fact={c.distanceTo.expressway}
+          format={formatDistance}
+        />
+        <FactRow
+          label="国道まで"
+          fact={c.distanceTo.nationalRoad}
+          format={formatDistance}
+        />
+        <FactRow
+          label="鉄道まで"
+          fact={c.distanceTo.railway}
+          format={formatDistance}
+        />
+        <FactRow
+          label="地面の種類"
+          fact={c.groundTypes}
+          format={(v) => v.join("・")}
+        />
+        <FactRow
+          label="トイレの設備"
+          fact={c.toiletFeatures}
+          format={(v) => v.join("・")}
+        />
+        <FactRow
+          label="総サイト数"
+          fact={c.totalSites}
+          format={(v) => `${v}サイト`}
+        />
+        <FactRow
+          label="座標"
+          fact={c.location}
+          format={(v) => `${v.lat}, ${v.lng}`}
+        />
+      </dl>
+
+      <h2 className="mt-6 font-semibold">サイトの種類</h2>
+      {c.siteTypes.map((s) => (
+        <section key={s.name} className="mt-4">
+          <h3 className="font-medium">{s.name}</h3>
+          <dl>
+            <FactRow label="区画の広さ" fact={s.area} format={formatArea} />
+            <FactRow
+              label="車の横付け"
+              fact={s.carAccess}
+              format={(v) => carAccessLabel[v]}
+            />
+          </dl>
+        </section>
+      ))}
+    </main>
+  );
+}
