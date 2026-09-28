@@ -9,7 +9,7 @@
 | Web アプリ | Next.js(App Router、TypeScript)。画面とサーバー側の処理を 1 つで持つ |
 | 公開先 | Vercel |
 | データベース | PostgreSQL(Supabase か Neon) |
-| データを集めて整える仕組み | 同じリポジトリのスクリプト。Web アプリとは分け、手元か GitHub Actions で動かす |
+| データを集めて整える仕組み | 同じリポジトリのスクリプト。Web アプリとは分ける |
 | リポジトリ | 1 つ |
 
 この構成を選んだ理由は [ADR 0001](adr/0001-single-nextjs-app.md)。
