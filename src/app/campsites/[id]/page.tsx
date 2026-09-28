@@ -66,7 +66,7 @@ function FactRow<T>({
               {sourceKindLabel[fact.source.kind]}
             </a>
             {fact.source.note && ` ${fact.source.note}`}
-            (調べた日: {fact.source.checkedAt})
+            (調べた日: {fact.source.checkedOn})
           </p>
         )}
       </dd>
