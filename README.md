@@ -13,3 +13,4 @@
 | [docs/concept.md](docs/concept.md) | 目的・対象ユーザー・課題・提供価値 |
 | [docs/mvp.md](docs/mvp.md) | MVP スコープ(何を作るか) |
 | [docs/tech.md](docs/tech.md) | 技術方針(何で作るか) |
+| [docs/adr/](docs/adr/) | 設計判断の記録(ADR) |
