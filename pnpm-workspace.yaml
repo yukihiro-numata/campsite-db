@@ -1,3 +1,5 @@
+savePrefix: ""
+
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
