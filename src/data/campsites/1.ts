@@ -1,27 +1,8 @@
-import type { Area, Campsite, CarAccess, Fact, Source } from "./types";
+import { distanceSource, known, travelSource, unknown } from "../facts";
+import type { Area, Campsite, CarAccess, Source } from "../types";
 
-function known<T>(value: T, source: Source): Fact<T> {
-  return { status: "known", value, source };
-}
-
-const unknown = { status: "unknown" } as const;
-
-const travelSource = (checkedOn: string): Source => ({
-  kind: "calculated",
-  url: "https://project-osrm.org/",
-  note: "東京駅からキャンプ場の座標まで、OSRM(OpenStreetMap のデータ)で経路を計算した渋滞なしの目安",
-  checkedOn,
-});
-
-const distanceSource = (checkedOn: string): Source => ({
-  kind: "calculated",
-  url: "https://maps.gsi.go.jp/development/vt.html",
-  note: "キャンプ場の座標から、国土地理院ベクトルタイルの道路・鉄道までの直線距離",
-  checkedOn,
-});
-
-// 1: リバーサイド長瀞オートキャンプ場
-const nagatoro = (() => {
+// リバーサイド長瀞オートキャンプ場
+export default (() => {
   const checkedOn = "2026-09-28";
   const autocamp: Source = {
     kind: "official",
@@ -95,9 +76,3 @@ const nagatoro = (() => {
     ],
   } satisfies Campsite;
 })();
-
-export const campsites: Campsite[] = [nagatoro];
-
-export function findCampsite(id: number): Campsite | undefined {
-  return campsites.find((c) => c.id === id);
-}

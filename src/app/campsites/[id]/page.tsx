@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { campsites, findCampsite } from "@/data/campsites";
 import type { Area, CarAccess, Fact, GroupPolicy, Source } from "@/data/types";
+import { findCampsite, listCampsites } from "@/lib/campsites";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return campsites.map((c) => ({ id: String(c.id) }));
+  return listCampsites().map((c) => ({ id: String(c.id) }));
 }
 
 function getCampsite(id: string) {
