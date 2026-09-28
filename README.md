@@ -14,3 +14,16 @@
 | [docs/mvp.md](docs/mvp.md) | MVP スコープ(何を作るか) |
 | [docs/tech.md](docs/tech.md) | 技術方針(何で作るか) |
 | [docs/adr/](docs/adr/) | 設計判断の記録(ADR) |
+
+## 開発
+
+Node.js と pnpm が必要。
+
+```sh
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm lint       # Lint・整形のチェック(Biome)
+pnpm format     # 整形
+pnpm typecheck  # 型チェック
+pnpm build
+```
