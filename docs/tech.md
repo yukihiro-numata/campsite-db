@@ -11,6 +11,9 @@
 | データベース | PostgreSQL(Supabase か Neon) |
 | データを集めて整える仕組み | 同じリポジトリのスクリプト。Web アプリとは分ける |
 | リポジトリ | 1 つ |
+| パッケージ管理 | pnpm |
+| Lint・整形 | Biome(Lint と整形を 1 つのツールで行う) |
+| スタイル | Tailwind CSS |
 
 この構成を選んだ理由は [ADR 0001](adr/0001-single-nextjs-app.md)。
 
