@@ -7,7 +7,7 @@ export type Source = {
   /** 計算した値の手順など */
   note?: string;
   /** 調べた日(YYYY-MM-DD) */
-  checkedOn: string;
+  checkedAt: string;
 };
 
 /** 出典付きの値。埋められない値は「未調査」にする。 */
