@@ -21,6 +21,11 @@ export type Area = { min: number; max: number; note?: string };
 export type CarAccess = "inside" | "front" | "none";
 
 export type GroupPolicy = {
+  /**
+   * no: 友人同士の複数家族などのグループを断っている
+   * conditional: 受け入れるが、人数の上限や事前の相談などの制限が書かれている
+   * yes: 制限が書かれていない、またはグループ向けとして案内している
+   */
   allowed: "yes" | "conditional" | "no";
   note?: string;
 };
