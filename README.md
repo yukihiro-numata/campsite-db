@@ -25,5 +25,6 @@ pnpm dev        # http://localhost:3000
 pnpm lint       # Lint・整形のチェック(Biome)
 pnpm format     # 整形
 pnpm typecheck  # 型チェック
+pnpm calc       # 計算して埋める値を出す(scripts/calc/)
 pnpm build
 ```
