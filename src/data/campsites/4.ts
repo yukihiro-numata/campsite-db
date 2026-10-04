@@ -1,4 +1,10 @@
-import { distanceSource, known, travelSource, unknown } from "../facts";
+import {
+  distanceSource,
+  known,
+  notStated,
+  travelSource,
+  unchecked,
+} from "../facts";
 import type { Campsite, Source } from "../types";
 
 // 成田ゆめ牧場ファミリーオートキャンプ場
@@ -43,21 +49,19 @@ export default (() => {
     },
     groundTypes: known(["芝"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
-    totalSites: unknown,
+    totalSites: unchecked,
     // 有料のコインシャワーで、湯船はない
     bathing: known("shower", camp2),
     rental: known(true, camp2),
-    // 「夜間等、営業時間外はスタッフは不在」
-    staffedOvernight: known(false, camp2),
     dayCamp: known(true, camp2),
     siteTypes: [
       {
         name: "一般サイト(D〜G)",
-        area: unknown,
+        area: unchecked,
         carAccess: known("inside", camp),
         layout: known("free", camp2),
-        // 電源が付くのは電源サイトだけ
-        power: known(false, camp2),
+        // 電源がないとは書かれていない
+        power: notStated(camp2),
         pets: known(true, camp2),
       },
       {

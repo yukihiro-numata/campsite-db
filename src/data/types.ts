@@ -10,10 +10,16 @@ export type Source = {
   checkedOn: string;
 };
 
-/** 出典付きの値。埋められない値は「未調査」にする。 */
+/**
+ * 出典付きの値。
+ * known: 値が分かっている
+ * notStated: 不明。調べたが、出典に書かれていなかった。source は調べたページ
+ * unchecked: 未調査。まだ調べていない
+ */
 export type Fact<T> =
   | { status: "known"; value: T; source: Source }
-  | { status: "unknown" };
+  | { status: "notStated"; source: Source }
+  | { status: "unchecked" };
 
 /** 区画の広さ(㎡)。公式の「約」の値をそのまま持つ */
 export type Area = { min: number; max: number; note?: string };
@@ -70,8 +76,6 @@ export type Campsite = {
   bathing: Fact<Bathing>;
   /** 道具を借りられるか */
   rental: Fact<boolean>;
-  /** 管理する人が夜も場内にいるか */
-  staffedOvernight: Fact<boolean>;
   /** デイキャンプができるか */
   dayCamp: Fact<boolean>;
   siteTypes: SiteType[];

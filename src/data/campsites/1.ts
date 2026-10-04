@@ -1,4 +1,10 @@
-import { distanceSource, known, travelSource, unknown } from "../facts";
+import {
+  distanceSource,
+  known,
+  notStated,
+  travelSource,
+  unchecked,
+} from "../facts";
 import type { Area, Campsite, CarAccess, Source } from "../types";
 
 // リバーサイド長瀞オートキャンプ場
@@ -19,17 +25,18 @@ export default (() => {
   // ペットは、公式はドッグサイト以外の可否を書いていないため、
   // なっぷの「オートサイトは全サイトOK」による
   const napPets: Source = { ...nap, checkedOn: checkedOn2 };
-  // 全サイトが区画。電源は公式で「AC電源付」とあるサイトだけ使える
+  // 全サイトが区画。公式は電源付きのサイトにだけ「AC電源付」と書いていて、
+  // ほかのサイトに電源がないとは書いていないため不明にする
   const site = (
     name: string,
     area: Area | null,
     { carAccess = "inside" as CarAccess, power = false, dog = false } = {},
   ) => ({
     name,
-    area: area ? known(area, autocamp) : unknown,
+    area: area ? known(area, autocamp) : unchecked,
     carAccess: known(carAccess, autocamp),
     layout: known("plot" as const, autocamp2),
-    power: known(power, autocamp2),
+    power: power ? known(true, autocamp2) : notStated(autocamp2),
     pets: known(true, dog ? autocamp2 : napPets),
   });
   const starry = { note: "車の駐車場所を除く" };
@@ -65,13 +72,11 @@ export default (() => {
       url: "https://www.nagatoro-camp.com/amenity/",
       checkedOn: checkedOn2,
     }),
-    // チェアや焚き火台などを借りられる。テント・タープは借りられない
     rental: known(true, {
       kind: "official",
       url: "https://www.nagatoro-camp.com/cost/",
       checkedOn: checkedOn2,
     }),
-    staffedOvernight: unknown,
     dayCamp: known(true, {
       kind: "official",
       url: "https://www.nagatoro-camp.com/daycamp/",

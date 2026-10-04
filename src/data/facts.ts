@@ -4,7 +4,13 @@ export function known<T>(value: T, source: Source): Fact<T> {
   return { status: "known", value, source };
 }
 
-export const unknown = { status: "unknown" } as const;
+/** 不明。調べたが、出典に書かれていなかった */
+export function notStated(source: Source) {
+  return { status: "notStated", source } as const;
+}
+
+/** 未調査。まだ調べていない */
+export const unchecked = { status: "unchecked" } as const;
 
 export const travelSource = (checkedOn: string): Source => ({
   kind: "calculated",

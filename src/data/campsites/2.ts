@@ -1,4 +1,10 @@
-import { distanceSource, known, travelSource, unknown } from "../facts";
+import {
+  distanceSource,
+  known,
+  notStated,
+  travelSource,
+  unchecked,
+} from "../facts";
 import type { Area, Campsite, CarAccess, Source } from "../types";
 
 // 北軽井沢スウィートグラス
@@ -34,10 +40,10 @@ export default (() => {
     return {
       name,
       area: known(area, tent),
-      carAccess: carAccess ? known(carAccess, tent) : unknown,
-      layout: detail ? known("plot" as const, detail) : unknown,
-      power: detail ? known(power, detail) : unknown,
-      pets: detail ? known(true, detail) : unknown,
+      carAccess: carAccess ? known(carAccess, tent) : unchecked,
+      layout: detail ? known("plot" as const, detail) : notStated(tent2),
+      power: detail ? known(power, detail) : notStated(tent2),
+      pets: detail ? known(true, detail) : notStated(tent2),
     };
   };
   const sqm = (m: number, note?: string): Area => ({ min: m, max: m, note });
@@ -71,7 +77,7 @@ export default (() => {
     },
     groundTypes: known(["芝", "土", "砂"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
-    totalSites: unknown,
+    totalSites: unchecked,
     // 予約制の貸切風呂
     bathing: known("bath", {
       kind: "official",
@@ -83,7 +89,6 @@ export default (() => {
       url: "https://sweetgrass.jp/rentals/",
       checkedOn: checkedOn2,
     }),
-    staffedOvernight: unknown,
     dayCamp: known(true, {
       kind: "official",
       url: "https://sweetgrass.jp/guidance/oneday.html",
@@ -114,7 +119,7 @@ export default (() => {
       site("林間サイト", sqm(100), "fc1068", { power: false }),
       site("浅間ビューサイト", sqm(120), "fc1072", { power: false }),
       site("大空サイト", sqm(160), "fc1073", { power: false }),
-      // 公式に詳細ページが見つからない
+      // 公式のテントサイト一覧になく、詳細ページも見つからない
       site("浅間ビューソロサイト", sqm(60), null, { carAccess: null }),
     ],
   } satisfies Campsite;

@@ -1,4 +1,4 @@
-import { distanceSource, known, travelSource, unknown } from "../facts";
+import { distanceSource, known, travelSource, unchecked } from "../facts";
 import type { Area, Campsite, CarAccess, Source } from "../types";
 
 // 有野実苑オートキャンプ場
@@ -41,7 +41,7 @@ export default (() => {
     };
     return {
       name,
-      area: area ? known(area, source) : unknown,
+      area: area ? known(area, source) : unchecked,
       carAccess: known(carAccess, source),
       layout: known("plot" as const, { ...autocamp, checkedOn: checkedOn2 }),
       power: known(power, source2),
@@ -84,14 +84,11 @@ export default (() => {
     totalSites: known(85, autocamp),
     // なっぷには「風呂」とあるが、公式はシャワーだけを案内しているので公式を採る
     bathing: known("shower", { ...autocamp, checkedOn: checkedOn2 }),
-    // 寝袋やランタンなどを借りられる。テント・タープは借りられない
     rental: known(true, {
       kind: "official",
       url: "https://arinomi.co.jp/rental/",
       checkedOn: checkedOn2,
     }),
-    staffedOvernight: unknown,
-    // 平日だけで、混雑日は販売しない場合がある
     dayCamp: known(true, { ...autocamp, checkedOn: checkedOn2 }),
     // 電源は有料オプションで、使えるのは一部の区画だけ
     siteTypes: [

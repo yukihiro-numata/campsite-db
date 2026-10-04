@@ -1,4 +1,4 @@
-import { distanceSource, known, travelSource, unknown } from "../facts";
+import { distanceSource, known, travelSource, unchecked } from "../facts";
 import type { Campsite, Source } from "../types";
 
 // ウェルキャンプ西丹沢
@@ -65,10 +65,8 @@ export default (() => {
     },
     groundTypes: known(["土", "砂"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
-    totalSites: unknown,
-    // 露天風呂はあるが、原則土曜だけの営業で、公式のお知らせでは休止中。
-    // 24 時間のコインシャワーがあるので「シャワーだけ」にする
-    bathing: known("shower", {
+    totalSites: unchecked,
+    bathing: known("bath", {
       kind: "official",
       url: "https://well-camp.com/facility/bath/",
       checkedOn: checkedOn2,
@@ -78,7 +76,6 @@ export default (() => {
       url: "https://well-camp.com/facility/rental/",
       checkedOn: checkedOn2,
     }),
-    staffedOvernight: unknown,
     dayCamp: known(true, price),
     siteTypes: [
       {

@@ -80,8 +80,12 @@ function FactRow<T>({
     <div className="border-b py-2">
       <dt className="text-sm text-gray-600">{label}</dt>
       <dd>
-        {fact.status === "known" ? format(fact.value) : "未調査"}
-        {fact.status === "known" && (
+        {fact.status === "known"
+          ? format(fact.value)
+          : fact.status === "notStated"
+            ? "不明"
+            : "未調査"}
+        {fact.status !== "unchecked" && (
           <p className="text-xs text-gray-500">
             <a href={fact.source.url} className="underline">
               {sourceKindLabel[fact.source.kind]}
@@ -154,13 +158,6 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
           format={(v) => bathingLabel[v]}
         />
         <FactRow label="レンタル" fact={c.rental} format={yesNo} />
-        <FactRow
-          label="24 時間管理"
-          fact={c.staffedOvernight}
-          format={(v) =>
-            v ? "夜も管理する人がいる" : "夜は管理する人がいない"
-          }
-        />
         <FactRow
           label="デイキャンプ"
           fact={c.dayCamp}
