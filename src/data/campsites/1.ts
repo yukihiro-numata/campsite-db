@@ -1,10 +1,4 @@
-import {
-  distanceSource,
-  known,
-  notStated,
-  travelSource,
-  unchecked,
-} from "../facts";
+import { calculated, known, notStated, unchecked } from "../facts";
 import type { Area, Campsite, CarAccess, Source } from "../types";
 
 // リバーサイド長瀞オートキャンプ場
@@ -53,17 +47,12 @@ export default (() => {
       },
     ),
     prefecture: known("埼玉県", autocamp2),
-    travelMinutes: known(85, travelSource(checkedOn)),
+    ...calculated(1),
     quietHours: known({ start: "22:00", end: "06:00" }, autocamp),
     groupPolicy: known(
       { allowed: "no", note: "サイトの数に関わらず 5 名まで" },
       autocamp,
     ),
-    distanceTo: {
-      expressway: known(null, distanceSource(checkedOn)),
-      nationalRoad: known(494, distanceSource(checkedOn)),
-      railway: known(338, distanceSource(checkedOn)),
-    },
     groundTypes: known(["土", "砂", "その他"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: known(80, autocamp),

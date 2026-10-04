@@ -1,10 +1,4 @@
-import {
-  distanceSource,
-  known,
-  notStated,
-  travelSource,
-  unchecked,
-} from "../facts";
+import { calculated, known, notStated, unchecked } from "../facts";
 import type { Area, Campsite, CarAccess, Source } from "../types";
 
 // 北軽井沢スウィートグラス
@@ -54,7 +48,7 @@ export default (() => {
     name: "北軽井沢スウィートグラス",
     location: known({ lat: 36.459958, lng: 138.576395 }, nap),
     prefecture: known("群馬県", tent2),
-    travelMinutes: known(161, travelSource(checkedOn)),
+    ...calculated(2),
     quietHours: known(
       { start: "22:00", end: "06:00" },
       {
@@ -70,11 +64,6 @@ export default (() => {
       },
       tent,
     ),
-    distanceTo: {
-      expressway: known(null, distanceSource(checkedOn)),
-      nationalRoad: known(838, distanceSource(checkedOn)),
-      railway: known(null, distanceSource(checkedOn)),
-    },
     groundTypes: known(["芝", "土", "砂"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: unchecked,

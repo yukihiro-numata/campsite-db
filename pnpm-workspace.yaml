@@ -1,5 +1,6 @@
 savePrefix: ""
 
 ignoredBuiltDependencies:
+  - esbuild
   - sharp
   - unrs-resolver

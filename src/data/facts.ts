@@ -1,4 +1,5 @@
-import type { Fact, Source } from "./types";
+import { calculatedOn, calculatedValues } from "./calculated";
+import type { Campsite, Fact, Source } from "./types";
 
 export function known<T>(value: T, source: Source): Fact<T> {
   return { status: "known", value, source };
@@ -12,16 +13,43 @@ export function notStated(source: Source) {
 /** 未調査。まだ調べていない */
 export const unchecked = { status: "unchecked" } as const;
 
-export const travelSource = (checkedOn: string): Source => ({
+const travelSource = (checkedOn: string): Source => ({
   kind: "calculated",
   url: "https://project-osrm.org/",
   note: "東京駅からキャンプ場の座標まで、OSRM(OpenStreetMap のデータ)で経路を計算した渋滞なしの目安",
   checkedOn,
 });
 
-export const distanceSource = (checkedOn: string): Source => ({
+const distanceSource = (checkedOn: string): Source => ({
   kind: "calculated",
   url: "https://maps.gsi.go.jp/development/vt.html",
   note: "キャンプ場の座標から、国土地理院ベクトルタイルの道路・鉄道までの直線距離",
   checkedOn,
 });
+
+/** 計算スクリプトで出した値。計算していないキャンプ場は未調査 */
+export function calculated(
+  id: number,
+): Pick<Campsite, "travelMinutes" | "distanceTo"> {
+  const v = calculatedValues[id];
+  if (!v) {
+    return {
+      travelMinutes: unchecked,
+      distanceTo: {
+        expressway: unchecked,
+        nationalRoad: unchecked,
+        railway: unchecked,
+      },
+    };
+  }
+  const travel = travelSource(calculatedOn);
+  const distance = distanceSource(calculatedOn);
+  return {
+    travelMinutes: known(v.travelMinutes, travel),
+    distanceTo: {
+      expressway: known(v.distanceTo.expressway, distance),
+      nationalRoad: known(v.distanceTo.nationalRoad, distance),
+      railway: known(v.distanceTo.railway, distance),
+    },
+  };
+}

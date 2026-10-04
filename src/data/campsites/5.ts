@@ -1,4 +1,4 @@
-import { distanceSource, known, travelSource, unchecked } from "../facts";
+import { calculated, known, unchecked } from "../facts";
 import type { Campsite, Source } from "../types";
 
 // ウェルキャンプ西丹沢
@@ -38,7 +38,7 @@ export default (() => {
       url: "https://well-camp.com/",
       checkedOn: checkedOn2,
     }),
-    travelMinutes: known(95, travelSource(checkedOn)),
+    ...calculated(5),
     quietHours: known(
       { start: "22:00", end: "06:00" },
       {
@@ -58,11 +58,6 @@ export default (() => {
         checkedOn,
       },
     ),
-    distanceTo: {
-      expressway: known(null, distanceSource(checkedOn)),
-      nationalRoad: known(null, distanceSource(checkedOn)),
-      railway: known(null, distanceSource(checkedOn)),
-    },
     groundTypes: known(["土", "砂"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: unchecked,

@@ -49,4 +49,4 @@ paths:
      (`https://msearch.gsi.go.jp/address-search/AddressSearch?q=住所`)で求めた座標。
      出典の種類は計算(`calculated`)にし、`note` に手順を書く
 - グループ利用の可・条件付き・不可は `GroupPolicy` のコメントの区切りに従う。
-- 所要時間と距離は計算スクリプトで出す(手で調べない)。
+- 所要時間と距離は計算スクリプト(`pnpm calc`、`scripts/calc/`)で出す(手で調べない)。
