@@ -22,6 +22,9 @@ export default (() => {
     name,
     area: area ? known(area, autocamp) : unknown,
     carAccess: known(carAccess, autocamp),
+    layout: unknown,
+    power: unknown,
+    pets: unknown,
   });
   const starry = { note: "車の駐車場所を除く" };
 
@@ -36,6 +39,7 @@ export default (() => {
         checkedOn,
       },
     ),
+    prefecture: unknown,
     travelMinutes: known(85, travelSource(checkedOn)),
     quietHours: known({ start: "22:00", end: "06:00" }, autocamp),
     groupPolicy: known(
@@ -50,6 +54,10 @@ export default (() => {
     groundTypes: known(["土", "砂", "その他"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: known(80, autocamp),
+    bathing: unknown,
+    rental: unknown,
+    staffedOvernight: unknown,
+    dayCamp: unknown,
     siteTypes: [
       site("V-ビューサイト レギュラー", { min: 100, max: 110 }),
       site("V-ビューサイト ワイド", { min: 140, max: 150 }),

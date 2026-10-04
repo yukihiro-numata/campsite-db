@@ -26,6 +26,7 @@ export default (() => {
         checkedOn,
       },
     ),
+    prefecture: unknown,
     travelMinutes: known(95, travelSource(checkedOn)),
     quietHours: known(
       { start: "22:00", end: "06:00" },
@@ -54,6 +55,10 @@ export default (() => {
     groundTypes: known(["土", "砂"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: unknown,
+    bathing: unknown,
+    rental: unknown,
+    staffedOvernight: unknown,
+    dayCamp: unknown,
     siteTypes: [
       {
         name: "キャンプサイト(宿泊)",
@@ -62,6 +67,9 @@ export default (() => {
           questions,
         ),
         carAccess: known("inside", questions),
+        layout: unknown,
+        power: unknown,
+        pets: unknown,
       },
     ],
   } satisfies Campsite;

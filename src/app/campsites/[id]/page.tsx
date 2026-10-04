@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import type { Area, CarAccess, Fact, GroupPolicy, Source } from "@/data/types";
+import type {
+  Area,
+  Bathing,
+  CarAccess,
+  Fact,
+  GroupPolicy,
+  Layout,
+  Source,
+} from "@/data/types";
 import { findCampsite, listCampsites } from "@/lib/campsites";
 
 export const dynamicParams = false;
@@ -33,6 +41,19 @@ const carAccessLabel: Record<CarAccess, string> = {
   front: "区画の前に駐車",
   none: "横付けできない",
 };
+
+const layoutLabel: Record<Layout, string> = {
+  plot: "区画サイト",
+  free: "フリーサイト",
+};
+
+const bathingLabel: Record<Bathing, string> = {
+  bath: "風呂がある",
+  shower: "シャワーだけある",
+  none: "ない",
+};
+
+const yesNo = (v: boolean) => (v ? "あり" : "なし");
 
 const groupLabel: Record<GroupPolicy["allowed"], string> = {
   yes: "可",
@@ -84,6 +105,7 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
 
       <h2 className="mt-6 font-semibold">基本情報</h2>
       <dl>
+        <FactRow label="都道府県" fact={c.prefecture} format={(v) => v} />
         <FactRow
           label="都心からの所要時間"
           fact={c.travelMinutes}
@@ -127,6 +149,24 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
           format={(v) => v.join("・")}
         />
         <FactRow
+          label="風呂・シャワー"
+          fact={c.bathing}
+          format={(v) => bathingLabel[v]}
+        />
+        <FactRow label="レンタル" fact={c.rental} format={yesNo} />
+        <FactRow
+          label="24 時間管理"
+          fact={c.staffedOvernight}
+          format={(v) =>
+            v ? "夜も管理する人がいる" : "夜は管理する人がいない"
+          }
+        />
+        <FactRow
+          label="デイキャンプ"
+          fact={c.dayCamp}
+          format={(v) => (v ? "できる" : "できない")}
+        />
+        <FactRow
           label="総サイト数"
           fact={c.totalSites}
           format={(v) => `${v}サイト`}
@@ -148,6 +188,17 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
               label="車の横付け"
               fact={s.carAccess}
               format={(v) => carAccessLabel[v]}
+            />
+            <FactRow
+              label="区画 / フリー"
+              fact={s.layout}
+              format={(v) => layoutLabel[v]}
+            />
+            <FactRow label="AC 電源" fact={s.power} format={yesNo} />
+            <FactRow
+              label="ペット"
+              fact={s.pets}
+              format={(v) => (v ? "連れて泊まれる" : "連れて泊まれない")}
             />
           </dl>
         </section>

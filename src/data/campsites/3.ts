@@ -40,6 +40,9 @@ export default (() => {
       name,
       area: area ? known(area, source) : unknown,
       carAccess: known(carAccess, source),
+      layout: unknown,
+      power: unknown,
+      pets: unknown,
     };
   };
 
@@ -54,6 +57,7 @@ export default (() => {
         checkedOn,
       },
     ),
+    prefecture: unknown,
     travelMinutes: known(67, travelSource(checkedOn)),
     quietHours: known({ start: "21:00", end: "06:30" }, faq),
     groupPolicy: known(
@@ -71,6 +75,10 @@ export default (() => {
     groundTypes: known(["土"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: known(85, autocamp),
+    bathing: unknown,
+    rental: unknown,
+    staffedOvernight: unknown,
+    dayCamp: unknown,
     siteTypes: [
       site("オートキャンプサイト", "オートキャンプサイト", [8, 8]),
       site("2家族用オートサイト", "2家族用オートサイト", null),

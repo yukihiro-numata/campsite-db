@@ -20,6 +20,12 @@ export type Area = { min: number; max: number; note?: string };
 
 export type CarAccess = "inside" | "front" | "none";
 
+/** 区画サイト / フリーサイト */
+export type Layout = "plot" | "free";
+
+/** 場内にある入浴設備のうち一番上のもの。風呂 / シャワーだけ / どちらもない */
+export type Bathing = "bath" | "shower" | "none";
+
 export type GroupPolicy = {
   /**
    * no: 友人同士の複数家族などのグループを断っている
@@ -34,12 +40,19 @@ export type SiteType = {
   name: string;
   area: Fact<Area>;
   carAccess: Fact<CarAccess>;
+  layout: Fact<Layout>;
+  /** AC 電源を使えるか */
+  power: Fact<boolean>;
+  /** ペットを連れて泊まれるか */
+  pets: Fact<boolean>;
 };
 
 export type Campsite = {
   id: number;
   name: string;
   location: Fact<{ lat: number; lng: number }>;
+  /** 都道府県(公式の住所から) */
+  prefecture: Fact<string>;
   /** 都心からの所要時間(分) */
   travelMinutes: Fact<number>;
   /** 静粛時間(HH:MM) */
@@ -54,5 +67,12 @@ export type Campsite = {
   groundTypes: Fact<string[]>;
   toiletFeatures: Fact<string[]>;
   totalSites: Fact<number>;
+  bathing: Fact<Bathing>;
+  /** 道具を借りられるか */
+  rental: Fact<boolean>;
+  /** 管理する人が夜も場内にいるか */
+  staffedOvernight: Fact<boolean>;
+  /** デイキャンプができるか */
+  dayCamp: Fact<boolean>;
   siteTypes: SiteType[];
 };

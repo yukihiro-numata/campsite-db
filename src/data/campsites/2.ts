@@ -22,6 +22,9 @@ export default (() => {
     name,
     area: known(area, tent),
     carAccess: carAccess ? known(carAccess, tent) : unknown,
+    layout: unknown,
+    power: unknown,
+    pets: unknown,
   });
   const sqm = (m: number, note?: string): Area => ({ min: m, max: m, note });
   const plus40 = "公式の表記は約80+40㎡で、+40㎡の内訳は書かれていない";
@@ -30,6 +33,7 @@ export default (() => {
     id: 2,
     name: "北軽井沢スウィートグラス",
     location: known({ lat: 36.459958, lng: 138.576395 }, nap),
+    prefecture: unknown,
     travelMinutes: known(161, travelSource(checkedOn)),
     quietHours: known(
       { start: "22:00", end: "06:00" },
@@ -54,6 +58,10 @@ export default (() => {
     groundTypes: known(["芝", "土", "砂"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: unknown,
+    bathing: unknown,
+    rental: unknown,
+    staffedOvernight: unknown,
+    dayCamp: unknown,
     siteTypes: [
       site("木立サイト80", sqm(80)),
       site("木立パークサイト", sqm(80, "別に駐車スペース約40㎡")),

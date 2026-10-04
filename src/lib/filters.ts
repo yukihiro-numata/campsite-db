@@ -1,4 +1,5 @@
 import type { Campsite, Fact, GroupPolicy, SiteType } from "@/data/types";
+import { listCampsites } from "./campsites";
 
 // 絞り込みの条件。値が「未調査」のものは、条件を満たすと確かめられないため外す。
 
@@ -32,6 +33,18 @@ const distanceOptions = (
     test: (c) => farFrom(m)(pick(c)),
   }));
 
+const isTrue = knownAnd<boolean>((v) => v);
+
+/** データに入っている値を、出てきた順に重複なく並べる */
+const knownValues = (pick: (c: Campsite) => Fact<string | string[]>) => [
+  ...new Set(
+    listCampsites().flatMap((c) => {
+      const fact = pick(c);
+      return fact.status === "known" ? [fact.value].flat() : [];
+    }),
+  ),
+];
+
 const groupIn = (allowed: GroupPolicy["allowed"][]) =>
   knownAnd<GroupPolicy>((g) => allowed.includes(g.allowed));
 
@@ -41,6 +54,15 @@ const quietFrom = (latest: string) =>
 
 export const campsiteFields: Field<CampsiteTest>[] = [
   {
+    name: "pref",
+    label: "都道府県",
+    options: knownValues((c) => c.prefecture).map((p) => ({
+      value: p,
+      label: p,
+      test: (c) => knownAnd<string>((v) => v === p)(c.prefecture),
+    })),
+  },
+  {
     name: "time",
     label: "都心からの所要時間",
     options: [60, 90, 120].map((min) => ({
@@ -48,6 +70,71 @@ export const campsiteFields: Field<CampsiteTest>[] = [
       label: `${min}分以内`,
       test: (c) => knownAnd<number>((v) => v <= min)(c.travelMinutes),
     })),
+  },
+  {
+    name: "bath",
+    label: "風呂・シャワー",
+    options: [
+      {
+        value: "shower",
+        label: "シャワーか風呂がある",
+        test: (c) => knownAnd((v) => v !== "none")(c.bathing),
+      },
+      {
+        value: "bath",
+        label: "風呂がある",
+        test: (c) => knownAnd((v) => v === "bath")(c.bathing),
+      },
+    ],
+  },
+  {
+    name: "ground",
+    label: "地面の種類",
+    // キャンプ場全体の値なので、そのサイトの種類の地面とは限らない
+    options: knownValues((c) => c.groundTypes)
+      .filter((g) => g !== "その他")
+      .map((g) => ({
+        value: g,
+        label: `${g}がある`,
+        test: (c) => knownAnd<string[]>((v) => v.includes(g))(c.groundTypes),
+      })),
+  },
+  {
+    name: "washlet",
+    label: "温水洗浄便座",
+    options: [
+      {
+        value: "yes",
+        label: "ある",
+        test: (c) =>
+          knownAnd<string[]>((v) => v.includes("温水洗浄便座"))(
+            c.toiletFeatures,
+          ),
+      },
+    ],
+  },
+  {
+    name: "rental",
+    label: "レンタル",
+    options: [{ value: "yes", label: "ある", test: (c) => isTrue(c.rental) }],
+  },
+  {
+    name: "staffed",
+    label: "24 時間管理",
+    options: [
+      {
+        value: "yes",
+        label: "夜も管理する人がいる",
+        test: (c) => isTrue(c.staffedOvernight),
+      },
+    ],
+  },
+  {
+    name: "day",
+    label: "デイキャンプ",
+    options: [
+      { value: "yes", label: "できる", test: (c) => isTrue(c.dayCamp) },
+    ],
   },
   {
     name: "quiet",
@@ -108,6 +195,34 @@ export const siteTypeFields: Field<SiteTypeTest>[] = [
         test: (s) =>
           knownAnd((v) => v === "inside" || v === "front")(s.carAccess),
       },
+    ],
+  },
+  {
+    name: "layout",
+    label: "区画 / フリー",
+    options: [
+      {
+        value: "plot",
+        label: "区画サイト",
+        test: (s) => knownAnd((v) => v === "plot")(s.layout),
+      },
+      {
+        value: "free",
+        label: "フリーサイト",
+        test: (s) => knownAnd((v) => v === "free")(s.layout),
+      },
+    ],
+  },
+  {
+    name: "power",
+    label: "AC 電源",
+    options: [{ value: "yes", label: "ある", test: (s) => isTrue(s.power) }],
+  },
+  {
+    name: "pets",
+    label: "ペット",
+    options: [
+      { value: "yes", label: "連れて泊まれる", test: (s) => isTrue(s.pets) },
     ],
   },
   {
