@@ -14,13 +14,19 @@ export default (() => {
     url: "https://www.nap-camp.com/chiba/11980",
     checkedOn,
   };
+  const checkedOn2 = "2026-10-04";
+  const camp2: Source = { ...camp, checkedOn: checkedOn2 };
 
   return {
     id: 4,
     name: "成田ゆめ牧場ファミリーオートキャンプ場",
     // 公式のアクセスページの地図は牧場の本体を指すため、なっぷの座標を使う
     location: known({ lat: 35.869383, lng: 140.39667 }, nap),
-    prefecture: unknown,
+    prefecture: known("千葉県", {
+      kind: "official",
+      url: "https://www.yumebokujo.com/access.html",
+      checkedOn: checkedOn2,
+    }),
     travelMinutes: known(69, travelSource(checkedOn)),
     quietHours: known({ start: "22:00", end: "06:00" }, camp),
     groupPolicy: known(
@@ -38,18 +44,21 @@ export default (() => {
     groundTypes: known(["芝"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: unknown,
-    bathing: unknown,
-    rental: unknown,
-    staffedOvernight: unknown,
-    dayCamp: unknown,
+    // 有料のコインシャワーで、湯船はない
+    bathing: known("shower", camp2),
+    rental: known(true, camp2),
+    // 「夜間等、営業時間外はスタッフは不在」
+    staffedOvernight: known(false, camp2),
+    dayCamp: known(true, camp2),
     siteTypes: [
       {
         name: "一般サイト(D〜G)",
         area: unknown,
         carAccess: known("inside", camp),
-        layout: unknown,
-        power: unknown,
-        pets: unknown,
+        layout: known("free", camp2),
+        // 電源が付くのは電源サイトだけ
+        power: known(false, camp2),
+        pets: known(true, camp2),
       },
       {
         name: "電源サイト(A〜C)",
@@ -62,9 +71,9 @@ export default (() => {
           camp,
         ),
         carAccess: known("inside", camp),
-        layout: unknown,
-        power: unknown,
-        pets: unknown,
+        layout: known("plot", camp2),
+        power: known(true, camp2),
+        pets: known(true, camp2),
       },
     ],
   } satisfies Campsite;
