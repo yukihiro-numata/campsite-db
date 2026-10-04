@@ -19,7 +19,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
       {/* クリアや戻るで URL が変わったとき、選択を URL に合わせ直す */}
       <Form key={JSON.stringify(selected)} action="" className="mt-4">
         <p className="text-sm text-gray-600">
-          値が未調査のキャンプ場は、その条件で絞り込むと外れます。
+          値が不明・未調査のキャンプ場は、その条件で絞り込むと外れます。
         </p>
         {[...campsiteFields, ...siteTypeFields].map((f) => (
           <label key={f.name} className="mt-2 flex justify-between gap-2">

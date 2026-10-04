@@ -1,7 +1,7 @@
 import type { Campsite, Fact, GroupPolicy, SiteType } from "@/data/types";
 import { listCampsites } from "./campsites";
 
-// 絞り込みの条件。値が「未調査」のものは、条件を満たすと確かめられないため外す。
+// 絞り込みの条件。値が「不明」「未調査」のものは、条件を満たすと確かめられないため外す。
 
 type Option = { value: string; label: string };
 
@@ -117,17 +117,6 @@ export const campsiteFields: Field<CampsiteTest>[] = [
     name: "rental",
     label: "レンタル",
     options: [{ value: "yes", label: "ある", test: (c) => isTrue(c.rental) }],
-  },
-  {
-    name: "staffed",
-    label: "24 時間管理",
-    options: [
-      {
-        value: "yes",
-        label: "夜も管理する人がいる",
-        test: (c) => isTrue(c.staffedOvernight),
-      },
-    ],
   },
   {
     name: "day",

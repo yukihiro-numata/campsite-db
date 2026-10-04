@@ -1,4 +1,4 @@
-import { distanceSource, known, travelSource, unknown } from "../facts";
+import { distanceSource, known, travelSource, unchecked } from "../facts";
 import type { Campsite, Source } from "../types";
 
 // ウェルキャンプ西丹沢
@@ -14,6 +14,13 @@ export default (() => {
     url: "https://www.nap-camp.com/kanagawa/11677",
     checkedOn,
   };
+  const checkedOn2 = "2026-10-04";
+  const questions2: Source = { ...questions, checkedOn: checkedOn2 };
+  const price: Source = {
+    kind: "official",
+    url: "https://well-camp.com/price/",
+    checkedOn: checkedOn2,
+  };
 
   return {
     id: 5,
@@ -26,7 +33,11 @@ export default (() => {
         checkedOn,
       },
     ),
-    prefecture: unknown,
+    prefecture: known("神奈川県", {
+      kind: "official",
+      url: "https://well-camp.com/",
+      checkedOn: checkedOn2,
+    }),
     travelMinutes: known(95, travelSource(checkedOn)),
     quietHours: known(
       { start: "22:00", end: "06:00" },
@@ -54,11 +65,18 @@ export default (() => {
     },
     groundTypes: known(["土", "砂"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
-    totalSites: unknown,
-    bathing: unknown,
-    rental: unknown,
-    staffedOvernight: unknown,
-    dayCamp: unknown,
+    totalSites: unchecked,
+    bathing: known("bath", {
+      kind: "official",
+      url: "https://well-camp.com/facility/bath/",
+      checkedOn: checkedOn2,
+    }),
+    rental: known(true, {
+      kind: "official",
+      url: "https://well-camp.com/facility/rental/",
+      checkedOn: checkedOn2,
+    }),
+    dayCamp: known(true, price),
     siteTypes: [
       {
         name: "キャンプサイト(宿泊)",
@@ -67,9 +85,11 @@ export default (() => {
           questions,
         ),
         carAccess: known("inside", questions),
-        layout: unknown,
-        power: unknown,
-        pets: unknown,
+        layout: known("plot", questions2),
+        // 電源付きと電源なしの区画がある
+        power: known(true, price),
+        // コテージ以外はペットと入れる
+        pets: known(true, questions2),
       },
     ],
   } satisfies Campsite;
