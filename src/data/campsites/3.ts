@@ -19,18 +19,21 @@ export default (() => {
     url: "https://www.nap-camp.com/chiba/11966",
     checkedOn,
   };
-  // 広さは各サイトのページの「約 縦×横 m」から求めた
+  const checkedOn2 = "2026-10-04";
+  // 広さは各サイトのページの「約 縦×横 m」から求めた。
+  // 全サイトが区画型(「キャンプサイトは木々で仕切られた区画型」)
   const site = (
     name: string,
     slug: string,
     size: [number, number] | null,
-    carAccess: CarAccess = "inside",
+    { power = false, pets = true, carAccess = "inside" as CarAccess } = {},
   ) => {
     const source: Source = {
       kind: "official",
       url: `https://arinomi.co.jp/campsites/${encodeURIComponent(slug)}/`,
       checkedOn,
     };
+    const source2: Source = { ...source, checkedOn: checkedOn2 };
     const area: Area | null = size && {
       min: size[0] * size[1],
       max: size[0] * size[1],
@@ -40,9 +43,9 @@ export default (() => {
       name,
       area: area ? known(area, source) : unknown,
       carAccess: known(carAccess, source),
-      layout: unknown,
-      power: unknown,
-      pets: unknown,
+      layout: known("plot" as const, { ...autocamp, checkedOn: checkedOn2 }),
+      power: known(power, source2),
+      pets: known(pets, source2),
     };
   };
 
@@ -57,7 +60,11 @@ export default (() => {
         checkedOn,
       },
     ),
-    prefecture: unknown,
+    prefecture: known("千葉県", {
+      kind: "official",
+      url: "https://arinomi.co.jp/access/",
+      checkedOn: checkedOn2,
+    }),
     travelMinutes: known(67, travelSource(checkedOn)),
     quietHours: known({ start: "21:00", end: "06:30" }, faq),
     groupPolicy: known(
@@ -75,23 +82,35 @@ export default (() => {
     groundTypes: known(["土"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: known(85, autocamp),
-    bathing: unknown,
-    rental: unknown,
+    // なっぷには「風呂」とあるが、公式はシャワーだけを案内しているので公式を採る
+    bathing: known("shower", { ...autocamp, checkedOn: checkedOn2 }),
+    // 寝袋やランタンなどを借りられる。テント・タープは借りられない
+    rental: known(true, {
+      kind: "official",
+      url: "https://arinomi.co.jp/rental/",
+      checkedOn: checkedOn2,
+    }),
     staffedOvernight: unknown,
-    dayCamp: unknown,
+    // 平日だけで、混雑日は販売しない場合がある
+    dayCamp: known(true, { ...autocamp, checkedOn: checkedOn2 }),
+    // 電源は有料オプションで、使えるのは一部の区画だけ
     siteTypes: [
-      site("オートキャンプサイト", "オートキャンプサイト", [8, 8]),
-      site("2家族用オートサイト", "2家族用オートサイト", null),
+      site("オートキャンプサイト", "オートキャンプサイト", [8, 8], {
+        power: true,
+      }),
+      site("2家族用オートサイト", "2家族用オートサイト", null, {
+        power: true,
+      }),
       site("テラスサイト", "テラスサイト", [12, 8]),
-      site("ルーフサイト", "ルーフサイト", [8, 10]),
+      site("ルーフサイト", "ルーフサイト", [8, 10], { power: true }),
       site(
         "ウッドパーテーションサイト",
         "ウッドパーテーションサイト",
         [12, 12],
       ),
       site("JIKABIオートサイト", "jikabiオートサイト", [6, 6]),
-      site("シェッドサイト", "シェッドサイト", [6, 6]),
-      site("ソロサイト", "ソロサイト", [5, 5], "none"),
+      site("シェッドサイト", "シェッドサイト", [6, 6], { pets: false }),
+      site("ソロサイト", "ソロサイト", [5, 5], { carAccess: "none" }),
     ],
   } satisfies Campsite;
 })();
