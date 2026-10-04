@@ -39,7 +39,10 @@ export default async function Home({ searchParams }: PageProps<"/">) {
           </label>
         ))}
         <p className="mt-1 text-sm text-gray-600">
-          車の横付けと区画の広さは、両方を満たすサイトの種類があるキャンプ場を出します。
+          サイトの種類の条件(車の横付けから区画の広さまで)は、すべてを満たすサイトの種類があるキャンプ場を出します。
+        </p>
+        <p className="mt-1 text-sm text-gray-600">
+          地面の種類はキャンプ場全体の値で、そのサイトの種類の地面とは限りません。
         </p>
         <div className="mt-2 flex gap-4">
           <button type="submit" className="border px-2">

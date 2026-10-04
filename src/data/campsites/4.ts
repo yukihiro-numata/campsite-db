@@ -20,6 +20,7 @@ export default (() => {
     name: "成田ゆめ牧場ファミリーオートキャンプ場",
     // 公式のアクセスページの地図は牧場の本体を指すため、なっぷの座標を使う
     location: known({ lat: 35.869383, lng: 140.39667 }, nap),
+    prefecture: unknown,
     travelMinutes: known(69, travelSource(checkedOn)),
     quietHours: known({ start: "22:00", end: "06:00" }, camp),
     groupPolicy: known(
@@ -37,11 +38,18 @@ export default (() => {
     groundTypes: known(["芝"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: unknown,
+    bathing: unknown,
+    rental: unknown,
+    staffedOvernight: unknown,
+    dayCamp: unknown,
     siteTypes: [
       {
         name: "一般サイト(D〜G)",
         area: unknown,
         carAccess: known("inside", camp),
+        layout: unknown,
+        power: unknown,
+        pets: unknown,
       },
       {
         name: "電源サイト(A〜C)",
@@ -54,6 +62,9 @@ export default (() => {
           camp,
         ),
         carAccess: known("inside", camp),
+        layout: unknown,
+        power: unknown,
+        pets: unknown,
       },
     ],
   } satisfies Campsite;
