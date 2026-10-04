@@ -1,7 +1,7 @@
 // 東京駅からキャンプ場の座標までの所要時間(分)を計算する。
 // OSRM の公開サーバーの車の経路で、渋滞なしの値。秒を分に直して四捨五入する
 
-import type { LatLng } from "./index";
+import type { LatLng } from "./index.ts";
 
 const ORIGIN: LatLng = { lat: 35.6812, lng: 139.7671 }; // 東京駅
 const URL = "https://router.project-osrm.org/route/v1/driving";

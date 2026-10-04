@@ -1,5 +1,5 @@
-import { calculated, known, unchecked } from "../facts";
-import type { Campsite, Source } from "../types";
+import { calculated, known, unchecked } from "../facts.ts";
+import type { Campsite, Source } from "../types.ts";
 
 // ウェルキャンプ西丹沢
 export default (() => {

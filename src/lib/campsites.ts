@@ -1,5 +1,5 @@
-import { campsites } from "@/data/campsites";
-import type { Campsite } from "@/data/types";
+import { campsites } from "@/data/campsites/index.ts";
+import type { Campsite } from "@/data/types.ts";
 
 export function listCampsites(): Campsite[] {
   return campsites;

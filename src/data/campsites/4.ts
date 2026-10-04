@@ -1,5 +1,5 @@
-import { calculated, known, notStated, unchecked } from "../facts";
-import type { Campsite, Source } from "../types";
+import { calculated, known, notStated, unchecked } from "../facts.ts";
+import type { Campsite, Source } from "../types.ts";
 
 // 成田ゆめ牧場ファミリーオートキャンプ場
 export default (() => {

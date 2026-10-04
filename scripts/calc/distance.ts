@@ -9,8 +9,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { VectorTile, type VectorTileFeature } from "@mapbox/vector-tile";
 import { PbfReader } from "pbf";
-import type { CalculatedValues } from "../../src/data/types";
-import type { LatLng } from "./index";
+import type { CalculatedValues } from "../../src/data/types.ts";
+import type { LatLng } from "./index.ts";
 
 type Distances = CalculatedValues["distanceTo"];
 

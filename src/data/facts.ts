@@ -1,5 +1,5 @@
-import { calculatedOn, calculatedValues } from "./calculated";
-import type { Campsite, Fact, Source } from "./types";
+import { calculatedOn, calculatedValues } from "./calculated.ts";
+import type { Campsite, Fact, Source } from "./types.ts";
 
 export function known<T>(value: T, source: Source): Fact<T> {
   return { status: "known", value, source };

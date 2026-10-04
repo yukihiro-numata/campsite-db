@@ -1,12 +1,12 @@
 import Form from "next/form";
 import Link from "next/link";
-import { listCampsites } from "@/lib/campsites";
+import { listCampsites } from "@/lib/campsites.ts";
 import {
   campsiteFields,
   filterCampsites,
   selectedValues,
   siteTypeFields,
-} from "@/lib/filters";
+} from "@/lib/filters.ts";
 
 export default async function Home({ searchParams }: PageProps<"/">) {
   const selected = selectedValues(await searchParams);

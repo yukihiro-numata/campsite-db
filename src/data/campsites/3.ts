@@ -1,5 +1,5 @@
-import { calculated, known, unchecked } from "../facts";
-import type { Area, Campsite, CarAccess, Source } from "../types";
+import { calculated, known, unchecked } from "../facts.ts";
+import type { Area, Campsite, CarAccess, Source } from "../types.ts";
 
 // 有野実苑オートキャンプ場
 export default (() => {

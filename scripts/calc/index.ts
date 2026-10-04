@@ -6,10 +6,10 @@
 
 import { execFileSync } from "node:child_process";
 import { writeFileSync } from "node:fs";
-import { campsites } from "../../src/data/campsites";
-import type { CalculatedValues } from "../../src/data/types";
-import { distances } from "./distance";
-import { travelMinutes } from "./travel";
+import { campsites } from "../../src/data/campsites/index.ts";
+import type { CalculatedValues } from "../../src/data/types.ts";
+import { distances } from "./distance.ts";
+import { travelMinutes } from "./travel.ts";
 
 export type LatLng = { lat: number; lng: number };
 
@@ -43,7 +43,7 @@ async function main() {
     OUT,
     [
       "// scripts/calc が書き出すファイル。手で直さない(pnpm calc で作り直す)",
-      'import type { CalculatedValues } from "./types";',
+      'import type { CalculatedValues } from "./types.ts";',
       "",
       `export const calculatedOn = "${today}";`,
       "",

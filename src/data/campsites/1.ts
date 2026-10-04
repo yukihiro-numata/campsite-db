@@ -1,5 +1,5 @@
-import { calculated, known, notStated, unchecked } from "../facts";
-import type { Area, Campsite, CarAccess, Source } from "../types";
+import { calculated, known, notStated, unchecked } from "../facts.ts";
+import type { Area, Campsite, CarAccess, Source } from "../types.ts";
 
 // リバーサイド長瀞オートキャンプ場
 export default (() => {

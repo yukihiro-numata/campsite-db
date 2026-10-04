@@ -1,9 +1,9 @@
-import type { Campsite } from "../types";
-import campsite1 from "./1";
-import campsite2 from "./2";
-import campsite3 from "./3";
-import campsite4 from "./4";
-import campsite5 from "./5";
+import type { Campsite } from "../types.ts";
+import campsite1 from "./1.ts";
+import campsite2 from "./2.ts";
+import campsite3 from "./3.ts";
+import campsite4 from "./4.ts";
+import campsite5 from "./5.ts";
 
 export const campsites: Campsite[] = [
   campsite1,
