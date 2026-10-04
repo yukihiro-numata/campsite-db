@@ -26,7 +26,7 @@ export default (() => {
   return {
     id: 4,
     name: "成田ゆめ牧場ファミリーオートキャンプ場",
-    // 公式のアクセスページの地図は牧場の本体を指すため、なっぷの座標を使う
+    // 公式のアクセスページの地図は牧場の本体を指すため、予約サイトの座標を使う
     location: known({ lat: 35.869383, lng: 140.39667 }, nap),
     prefecture: known("千葉県", {
       kind: "official",
