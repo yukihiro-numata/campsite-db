@@ -23,8 +23,8 @@ export default (() => {
   const checkedOn2 = "2026-10-04";
   const autocamp2: Source = { ...autocamp, checkedOn: checkedOn2 };
   // ペットは、公式はドッグサイト以外の可否を書いていないため、
-  // なっぷの「オートサイトは全サイトOK」による
-  const napPets: Source = { ...nap, checkedOn: checkedOn2 };
+  // 予約サイトの「オートサイトは全サイトOK」による
+  const bookingPets: Source = { ...nap, checkedOn: checkedOn2 };
   // 全サイトが区画。公式は電源付きのサイトにだけ「AC電源付」と書いていて、
   // ほかのサイトに電源がないとは書いていないため不明にする
   const site = (
@@ -37,7 +37,7 @@ export default (() => {
     carAccess: known(carAccess, autocamp),
     layout: known("plot" as const, autocamp2),
     power: power ? known(true, autocamp2) : notStated(autocamp2),
-    pets: known(true, dog ? autocamp2 : napPets),
+    pets: known(true, dog ? autocamp2 : bookingPets),
   });
   const starry = { note: "車の駐車場所を除く" };
 

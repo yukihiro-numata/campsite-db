@@ -82,7 +82,7 @@ export default (() => {
     groundTypes: known(["土"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: known(85, autocamp),
-    // なっぷには「風呂」とあるが、公式はシャワーだけを案内しているので公式を採る
+    // 予約サイトには「風呂」とあるが、公式はシャワーだけを案内しているので公式を採る
     bathing: known("shower", { ...autocamp, checkedOn: checkedOn2 }),
     rental: known(true, {
       kind: "official",
