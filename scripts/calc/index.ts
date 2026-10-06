@@ -26,7 +26,7 @@ async function main() {
   // 日本時間の今日を、出典の「調べた日」と同じ YYYY-MM-DD で出す。
   // スウェーデン(sv-SE)の書き方がちょうどこの形になるため使っている。
   // toISOString() は世界標準時なので、日本時間の朝 9 時前だと前の日になる
-  const today =new Date().toLocaleDateString("sv-SE", {
+  const today = new Date().toLocaleDateString("sv-SE", {
     timeZone: "Asia/Tokyo",
   });
   const values: Record<number, CalculatedValues> = {};
