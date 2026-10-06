@@ -1,4 +1,4 @@
-import { calculated, known, unchecked } from "../facts.ts";
+import { calculatedFacts, known, unchecked } from "../facts.ts";
 import type { Campsite, Source } from "../types.ts";
 
 // ウェルキャンプ西丹沢
@@ -38,7 +38,7 @@ export default (() => {
       url: "https://well-camp.com/",
       checkedOn: checkedOn2,
     }),
-    ...calculated(5),
+    ...calculatedFacts(5),
     quietHours: known(
       { start: "22:00", end: "06:00" },
       {

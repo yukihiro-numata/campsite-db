@@ -1,4 +1,4 @@
-import { calculated, known, notStated, unchecked } from "../facts.ts";
+import { calculatedFacts, known, notStated, unchecked } from "../facts.ts";
 import type { Area, Campsite, CarAccess, Source } from "../types.ts";
 
 // リバーサイド長瀞オートキャンプ場
@@ -47,7 +47,7 @@ export default (() => {
       },
     ),
     prefecture: known("埼玉県", autocamp2),
-    ...calculated(1),
+    ...calculatedFacts(1),
     quietHours: known({ start: "22:00", end: "06:00" }, autocamp),
     groupPolicy: known(
       { allowed: "no", note: "サイトの数に関わらず 5 名まで" },

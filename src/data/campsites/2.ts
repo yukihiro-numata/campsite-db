@@ -1,4 +1,4 @@
-import { calculated, known, notStated, unchecked } from "../facts.ts";
+import { calculatedFacts, known, notStated, unchecked } from "../facts.ts";
 import type { Area, Campsite, CarAccess, Source } from "../types.ts";
 
 // 北軽井沢スウィートグラス
@@ -48,7 +48,7 @@ export default (() => {
     name: "北軽井沢スウィートグラス",
     location: known({ lat: 36.459958, lng: 138.576395 }, nap),
     prefecture: known("群馬県", tent2),
-    ...calculated(2),
+    ...calculatedFacts(2),
     quietHours: known(
       { start: "22:00", end: "06:00" },
       {

@@ -28,7 +28,7 @@ const distanceSource = (checkedOn: string): Source => ({
 });
 
 /** 計算スクリプトで出した値。計算していないキャンプ場は未調査 */
-export function calculated(
+export function calculatedFacts(
   id: number,
 ): Pick<Campsite, "travelMinutes" | "distanceTo"> {
   const v = calculatedValues[id];

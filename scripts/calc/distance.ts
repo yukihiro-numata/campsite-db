@@ -11,8 +11,7 @@ import { VectorTile, type VectorTileLayer } from "@mapbox/vector-tile";
 import { lineString, point } from "@turf/helpers";
 import { pointToLineDistance } from "@turf/point-to-line-distance";
 import { PbfReader } from "pbf";
-import type { CalculatedValues } from "../../src/data/types.ts";
-import type { LatLng } from "./index.ts";
+import type { CalculatedValues, LatLng } from "../../src/data/types.ts";
 
 type Kind = keyof CalculatedValues["distanceTo"];
 type Line = { kind: Kind; geometry: ReturnType<typeof lineString> };
@@ -24,7 +23,7 @@ const ZOOM = 16;
 const AROUND = 5;
 const TILE_URL = "https://cyberjapandata.gsi.go.jp/xyz/experimental_bvmap";
 
-export async function distances(
+export async function distancesFrom(
   campsite: LatLng,
 ): Promise<CalculatedValues["distanceTo"]> {
   const lines: Line[] = [];

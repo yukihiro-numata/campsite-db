@@ -1,7 +1,7 @@
 // scripts/calc が書き出すファイル。手で直さない(pnpm calc で作り直す)
 import type { CalculatedValues } from "./types.ts";
 
-export const calculatedOn = "2026-10-05";
+export const calculatedOn = "2026-10-06";
 
 export const calculatedValues: Record<number, CalculatedValues> = {
   1: {

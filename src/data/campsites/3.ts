@@ -1,4 +1,4 @@
-import { calculated, known, unchecked } from "../facts.ts";
+import { calculatedFacts, known, unchecked } from "../facts.ts";
 import type { Area, Campsite, CarAccess, Source } from "../types.ts";
 
 // 有野実苑オートキャンプ場
@@ -65,7 +65,7 @@ export default (() => {
       url: "https://arinomi.co.jp/access/",
       checkedOn: checkedOn2,
     }),
-    ...calculated(3),
+    ...calculatedFacts(3),
     quietHours: known({ start: "21:00", end: "06:30" }, faq),
     groupPolicy: known(
       {

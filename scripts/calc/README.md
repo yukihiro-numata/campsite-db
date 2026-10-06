@@ -1,7 +1,7 @@
 # 計算して埋める値のスクリプト
 
 キャンプ場データのうち、地図データから計算で出す値を求めて `src/data/calculated.ts` に
-書き出す。各キャンプ場のファイルは `calculated(id)` でこの値を読み込む。
+書き出す。各キャンプ場のファイルは `calculatedFacts(id)` でこの値を読み込む。
 
 ```sh
 pnpm calc
@@ -13,7 +13,7 @@ pnpm calc
   毎回すべて計算し直すので、地図データの更新で変わった値は PR の差分に出る。
 - `src/data/calculated.ts` は手で直さない。
 - 計算を足すときは、`CalculatedValues`(`src/data/types.ts`)と `index.ts` の
-  `calculate()`、`src/data/facts.ts` の `calculated()` に足す。
+  `calculate()`、`src/data/facts.ts` の `calculatedFacts()` に足す。
 
 ## 計算する値
 

@@ -7,18 +7,16 @@
 import { execFileSync } from "node:child_process";
 import { writeFileSync } from "node:fs";
 import { campsites } from "../../src/data/campsites/index.ts";
-import type { CalculatedValues } from "../../src/data/types.ts";
-import { distances } from "./distance.ts";
+import type { CalculatedValues, LatLng } from "../../src/data/types.ts";
+import { distancesFrom } from "./distance.ts";
 import { travelMinutes } from "./travel.ts";
 
-export type LatLng = { lat: number; lng: number };
-
-const OUT = "src/data/calculated.ts";
+const OUTPUT_FILE = "src/data/calculated.ts";
 
 async function calculate(location: LatLng): Promise<CalculatedValues> {
   return {
     travelMinutes: await travelMinutes(location),
-    distanceTo: await distances(location),
+    distanceTo: await distancesFrom(location),
   };
 }
 
@@ -30,20 +28,22 @@ async function main() {
     timeZone: "Asia/Tokyo",
   });
   const values: Record<number, CalculatedValues> = {};
-  for (const c of campsites) {
-    if (c.location.status !== "known") {
-      console.log(`${c.id} ${c.name}: 座標がないため飛ばす`);
+  for (const campsite of campsites) {
+    if (campsite.location.status !== "known") {
+      console.log(`${campsite.id} ${campsite.name}: 座標がないため飛ばす`);
       continue;
     }
-    values[c.id] = await calculate(c.location.value);
-    console.log(`${c.id} ${c.name}: ${JSON.stringify(values[c.id])}`);
+    values[campsite.id] = await calculate(campsite.location.value);
+    console.log(
+      `${campsite.id} ${campsite.name}: ${JSON.stringify(values[campsite.id])}`,
+    );
   }
 
   const entries = Object.entries(values)
     .map(([id, v]) => `${id}: ${JSON.stringify(v)},`)
     .join("\n");
   writeFileSync(
-    OUT,
+    OUTPUT_FILE,
     [
       "// scripts/calc が書き出すファイル。手で直さない(pnpm calc で作り直す)",
       'import type { CalculatedValues } from "./types.ts";',
@@ -54,10 +54,10 @@ async function main() {
       "",
     ].join("\n"),
   );
-  execFileSync("pnpm", ["exec", "biome", "format", "--write", OUT], {
+  execFileSync("pnpm", ["exec", "biome", "format", "--write", OUTPUT_FILE], {
     stdio: "ignore",
   });
-  console.log(`${OUT} に書き出した(${today})`);
+  console.log(`${OUTPUT_FILE} に書き出した(${today})`);
 }
 
 main();

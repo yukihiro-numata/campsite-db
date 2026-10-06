@@ -1,4 +1,4 @@
-import { calculated, known, notStated, unchecked } from "../facts.ts";
+import { calculatedFacts, known, notStated, unchecked } from "../facts.ts";
 import type { Campsite, Source } from "../types.ts";
 
 // 成田ゆめ牧場ファミリーオートキャンプ場
@@ -27,7 +27,7 @@ export default (() => {
       url: "https://www.yumebokujo.com/access.html",
       checkedOn: checkedOn2,
     }),
-    ...calculated(4),
+    ...calculatedFacts(4),
     quietHours: known({ start: "22:00", end: "06:00" }, camp),
     groupPolicy: known(
       {
