@@ -76,6 +76,7 @@ export default (() => {
     ),
     groundTypes: known(["土"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
+    // 公式の「全85区画」による。サイト別のページの区画数を足すと 82 になる
     totalSites: known(85, autocamp),
     // 予約サイトには「風呂」とあるが、公式はシャワーだけを案内しているので公式を採る
     bathing: known("shower", { ...autocamp, checkedOn: checkedOn2 }),

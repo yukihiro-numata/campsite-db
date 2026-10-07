@@ -48,5 +48,6 @@ paths:
   3. 公式の住所から、国土地理院の住所検索 API
      (`https://msearch.gsi.go.jp/address-search/AddressSearch?q=住所`)で求めた座標。
      出典の種類は計算(`calculated`)にし、`note` に手順を書く
+- 静粛時間は、始まりの時刻だけが書かれていれば始まりだけを入れる(終わりは推し量らない)。
 - グループ利用の可・条件付き・不可は `GroupPolicy` のコメントの区切りに従う。
 - 所要時間と距離は計算スクリプト(`pnpm calc`、`scripts/calc/`)で出す(手で調べない)。
