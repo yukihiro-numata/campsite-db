@@ -1,11 +1,5 @@
-import {
-  distanceSource,
-  known,
-  notStated,
-  travelSource,
-  unchecked,
-} from "../facts";
-import type { Campsite, Source } from "../types";
+import { calculatedFacts, known, notStated, unchecked } from "../facts.ts";
+import type { Campsite, Source } from "../types.ts";
 
 // 成田ゆめ牧場ファミリーオートキャンプ場
 export default (() => {
@@ -33,7 +27,7 @@ export default (() => {
       url: "https://www.yumebokujo.com/access.html",
       checkedOn: checkedOn2,
     }),
-    travelMinutes: known(69, travelSource(checkedOn)),
+    ...calculatedFacts(4),
     quietHours: known({ start: "22:00", end: "06:00" }, camp),
     groupPolicy: known(
       {
@@ -42,11 +36,6 @@ export default (() => {
       },
       camp,
     ),
-    distanceTo: {
-      expressway: known(572, distanceSource(checkedOn)),
-      nationalRoad: known(null, distanceSource(checkedOn)),
-      railway: known(null, distanceSource(checkedOn)),
-    },
     groundTypes: known(["芝"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: unchecked,

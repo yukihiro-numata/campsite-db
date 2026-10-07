@@ -1,5 +1,5 @@
-import type { Campsite, Fact, GroupPolicy, SiteType } from "@/data/types";
-import { listCampsites } from "./campsites";
+import type { Campsite, Fact, GroupPolicy, SiteType } from "@/data/types.ts";
+import { listCampsites } from "./campsites.ts";
 
 // 絞り込みの条件。値が「不明」「未調査」のものは、条件を満たすと確かめられないため外す。
 

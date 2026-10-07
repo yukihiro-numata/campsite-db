@@ -8,8 +8,8 @@ import type {
   GroupPolicy,
   Layout,
   Source,
-} from "@/data/types";
-import { findCampsite, listCampsites } from "@/lib/campsites";
+} from "@/data/types.ts";
+import { findCampsite, listCampsites } from "@/lib/campsites.ts";
 
 export const dynamicParams = false;
 

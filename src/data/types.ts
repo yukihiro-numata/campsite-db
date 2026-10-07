@@ -53,10 +53,13 @@ export type SiteType = {
   pets: Fact<boolean>;
 };
 
+/** 緯度・経度 */
+export type LatLng = { lat: number; lng: number };
+
 export type Campsite = {
   id: number;
   name: string;
-  location: Fact<{ lat: number; lng: number }>;
+  location: Fact<LatLng>;
   /** 都道府県(公式の住所から) */
   prefecture: Fact<string>;
   /** 都心からの所要時間(分) */
@@ -79,4 +82,14 @@ export type Campsite = {
   /** デイキャンプができるか */
   dayCamp: Fact<boolean>;
   siteTypes: SiteType[];
+};
+
+/** 計算スクリプトで出す値。キャンプ場ごとに src/data/calculated.ts に書き出す */
+export type CalculatedValues = {
+  travelMinutes: number;
+  distanceTo: {
+    expressway: number | null;
+    nationalRoad: number | null;
+    railway: number | null;
+  };
 };

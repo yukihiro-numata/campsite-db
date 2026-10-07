@@ -1,5 +1,5 @@
-import { distanceSource, known, travelSource, unchecked } from "../facts";
-import type { Area, Campsite, CarAccess, Source } from "../types";
+import { calculatedFacts, known, unchecked } from "../facts.ts";
+import type { Area, Campsite, CarAccess, Source } from "../types.ts";
 
 // 有野実苑オートキャンプ場
 export default (() => {
@@ -65,7 +65,7 @@ export default (() => {
       url: "https://arinomi.co.jp/access/",
       checkedOn: checkedOn2,
     }),
-    travelMinutes: known(67, travelSource(checkedOn)),
+    ...calculatedFacts(3),
     quietHours: known({ start: "21:00", end: "06:30" }, faq),
     groupPolicy: known(
       {
@@ -74,11 +74,6 @@ export default (() => {
       },
       faq,
     ),
-    distanceTo: {
-      expressway: known(null, distanceSource(checkedOn)),
-      nationalRoad: known(null, distanceSource(checkedOn)),
-      railway: known(null, distanceSource(checkedOn)),
-    },
     groundTypes: known(["土"], nap),
     toiletFeatures: known(["温水洗浄便座"], nap),
     totalSites: known(85, autocamp),
