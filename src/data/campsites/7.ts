@@ -44,11 +44,14 @@ export default (() => {
     ...calculatedFacts(7),
     // 「21:30以降はお静かに」とあり、消灯時間は特に設けていないとも書かれている。
     // 終わりの時刻は書かれていない
-    quietHours: notStated({
-      kind: "official",
-      url: "https://forestsons.jp/dear-customer/",
-      checkedOn,
-    }),
+    quietHours: known(
+      { start: "21:00" },
+      {
+        kind: "official",
+        url: "https://forestsons.jp/dear-customer/",
+        checkedOn,
+      },
+    ),
     // テントサイトは 1 区画 4 名まで(テントサイトのページ)。
     // ソロ&デュオフリーサイトは 2 名ずつ代表者を分けて予約する(フリーサイトのページ)
     groupPolicy: known(

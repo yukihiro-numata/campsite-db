@@ -29,7 +29,7 @@ export default (() => {
     prefecture: known("埼玉県", access),
     ...calculatedFacts(10),
     // 「夜10時以降、お静かに」とだけあり、終わりの時刻は書かれていない
-    quietHours: notStated(guidance),
+    quietHours: known({ start: "22:00" }, guidance),
     groupPolicy: known(
       {
         allowed: "conditional",

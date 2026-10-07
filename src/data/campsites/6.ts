@@ -24,11 +24,10 @@ export default (() => {
     url: "https://www.nap-camp.com/saitama/11028",
     checkedOn,
   };
-  // 公式は区画の広さを書いていないため、予約サイトのキャンプ場による
-  // 「キャンプサイトのご案内」の「おおよそ 縦×横 m」から求めた
   const napSites: Source = {
     kind: "booking",
     url: "https://www.nap-camp.com/saitama/11028/topics_dtl?campsite_topics_id=21743",
+    note: "公式に記載がないため、予約サイトにキャンプ場が載せている案内の「おおよそ 縦×横 m」から計算",
     checkedOn,
   };
   // 全サイトが区画で、車を横付けできる(「すべてのサイトで車を横付けできます」)。
@@ -60,7 +59,7 @@ export default (() => {
     }),
     ...calculatedFacts(6),
     // 「夜9時以降は静かに」とあるが、終わりの時刻は書かれていない
-    quietHours: notStated(annai),
+    quietHours: known({ start: "21:00" }, annai),
     groupPolicy: known(
       {
         allowed: "conditional",

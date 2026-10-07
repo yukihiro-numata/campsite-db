@@ -46,7 +46,7 @@ export default (() => {
     prefecture: known("埼玉県", access),
     ...calculatedFacts(8),
     // 「22時以降サイレントタイム」とだけあり、終わりの時刻が書かれていない
-    quietHours: notStated(autocamp),
+    quietHours: known({ start: "22:00" }, autocamp),
     groupPolicy: known(
       {
         allowed: "conditional",
