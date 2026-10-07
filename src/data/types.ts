@@ -64,8 +64,8 @@ export type Campsite = {
   prefecture: Fact<string>;
   /** 都心からの所要時間(分) */
   travelMinutes: Fact<number>;
-  /** 静粛時間(HH:MM) */
-  quietHours: Fact<{ start: string; end: string }>;
+  /** 静粛時間(HH:MM)。終わりの時刻が書かれていなければ end はない */
+  quietHours: Fact<{ start: string; end?: string }>;
   groupPolicy: Fact<GroupPolicy>;
   /** 代表地点からの直線距離(m)。null は半径 1,500m 以内にない */
   distanceTo: {

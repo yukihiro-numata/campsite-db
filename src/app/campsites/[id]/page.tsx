@@ -118,7 +118,7 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
         <FactRow
           label="静粛時間"
           fact={c.quietHours}
-          format={(v) => `${v.start}〜${v.end}`}
+          format={(v) => `${v.start}〜${v.end ?? ""}`}
         />
         <FactRow
           label="グループ利用"
