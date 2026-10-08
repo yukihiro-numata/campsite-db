@@ -104,4 +104,24 @@ export const calculatedValues: Record<number, CalculatedValues> = {
     travelMinutes: 127,
     distanceTo: { expressway: null, nationalRoad: null, railway: null },
   },
+  26: {
+    travelMinutes: 120,
+    distanceTo: { expressway: null, nationalRoad: null, railway: null },
+  },
+  27: {
+    travelMinutes: 181,
+    distanceTo: { expressway: null, nationalRoad: null, railway: null },
+  },
+  28: {
+    travelMinutes: 170,
+    distanceTo: { expressway: null, nationalRoad: null, railway: null },
+  },
+  29: {
+    travelMinutes: 153,
+    distanceTo: { expressway: null, nationalRoad: null, railway: null },
+  },
+  30: {
+    travelMinutes: 129,
+    distanceTo: { expressway: null, nationalRoad: null, railway: 1101 },
+  },
 };
