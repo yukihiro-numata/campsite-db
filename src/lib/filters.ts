@@ -45,6 +45,12 @@ const knownValues = (pick: (c: Campsite) => Fact<string | string[]>) => [
   ),
 ];
 
+const countWith = (ground: string) =>
+  listCampsites().filter(
+    (c) =>
+      c.groundTypes.status === "known" && c.groundTypes.value.includes(ground),
+  ).length;
+
 const groupIn = (allowed: GroupPolicy["allowed"][]) =>
   knownAnd<GroupPolicy>((g) => allowed.includes(g.allowed));
 
@@ -90,9 +96,10 @@ export const campsiteFields: Field<CampsiteTest>[] = [
   {
     name: "ground",
     label: "地面の種類",
-    // キャンプ場全体の値なので、そのサイトの種類の地面とは限らない
+    // キャンプ場全体の値なので、そのサイトの種類の地面とは限らない。
+    // 1 件のキャンプ場にしかない語は、絞り込んでも 1 件しか出ないので選択肢にしない
     options: knownValues((c) => c.groundTypes)
-      .filter((g) => g !== "その他")
+      .filter((g) => g !== "その他" && countWith(g) >= 2)
       .map((g) => ({
         value: g,
         label: `${g}がある`,
