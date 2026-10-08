@@ -23,7 +23,7 @@ const travelSource = (checkedOn: string): Source => ({
 const distanceSource = (checkedOn: string): Source => ({
   kind: "calculated",
   url: "https://maps.gsi.go.jp/development/vt.html",
-  note: "キャンプ場の座標から、国土地理院ベクトルタイルの道路・鉄道までの直線距離",
+  note: "キャンプ場の座標から、国土地理院ベクトルタイルの道路・鉄道・水辺までの直線距離",
   checkedOn,
 });
 
@@ -47,6 +47,9 @@ export function calculatedFacts(
         expressway: unchecked,
         nationalRoad: unchecked,
         railway: unchecked,
+        sea: unchecked,
+        lake: unchecked,
+        river: unchecked,
       },
     };
   }
@@ -73,6 +76,9 @@ export function calculatedFacts(
       expressway: known(v.distanceTo.expressway, distance),
       nationalRoad: known(v.distanceTo.nationalRoad, distance),
       railway: known(v.distanceTo.railway, distance),
+      sea: known(v.distanceTo.sea, distance),
+      lake: known(v.distanceTo.lake, distance),
+      river: known(v.distanceTo.river, distance),
     },
   };
 }

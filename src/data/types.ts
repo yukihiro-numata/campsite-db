@@ -74,6 +74,12 @@ export type Campsite = {
     expressway: Fact<number | null>;
     nationalRoad: Fact<number | null>;
     railway: Fact<number | null>;
+    /** 海岸線 */
+    sea: Fact<number | null>;
+    /** 湖・池の岸 */
+    lake: Fact<number | null>;
+    /** 幅のある川の岸(細い川・用水路は含まない) */
+    river: Fact<number | null>;
   };
   groundTypes: Fact<string[]>;
   toiletFeatures: Fact<string[]>;
@@ -95,5 +101,8 @@ export type CalculatedValues = {
     expressway: number | null;
     nationalRoad: number | null;
     railway: number | null;
+    sea: number | null;
+    lake: number | null;
+    river: number | null;
   };
 };
