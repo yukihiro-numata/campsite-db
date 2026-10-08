@@ -14,10 +14,3 @@ pnpm calc
 - `src/data/calculated.ts` は手で直さない。
 - 計算を足すときは、`CalculatedValues`(`src/data/types.ts`)と `index.ts` の
   `calculate()`、`src/data/facts.ts` の `calculatedFacts()` に足す。
-
-## 計算する値
-
-| 値 | 出し方 |
-|---|---|
-| 所要時間 | 東京駅(35.6812, 139.7671)からキャンプ場の座標まで、OSRM 公開サーバーの車の経路(渋滞なし)。分に四捨五入 |
-| 高速道路・国道・鉄道までの距離 | 国土地理院ベクトルタイル(experimental_bvmap、ズーム 16)の road(rdCtg 0=国道、3=高速)と railway(ftCode 8201)。座標から一番近い線までの距離を Turf(地図計算のライブラリ)で計算。m に四捨五入し、1,500m を超えれば null |
