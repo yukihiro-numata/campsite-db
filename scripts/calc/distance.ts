@@ -103,7 +103,13 @@ function roadKind(props: Record<string, unknown>): Kind | null {
   return null;
 }
 
-/** 鉄道の種類。ftCode 8201=普通鉄道 */
+/**
+ * 鉄道の種類。ftCode 8201=鉄道中心線。ただし rtCode(路線の分類)が 40206 で
+ * 始まる線は索道(ロープウェイ)なので除く。宝登山・箱根・榛名山のロープウェイが
+ * この分類で、駅の注記で確かめた
+ */
 function railKind(props: Record<string, unknown>): Kind | null {
-  return props.ftCode === 8201 ? "railway" : null;
+  if (props.ftCode !== 8201) return null;
+  if (String(props.rtCode).startsWith("40206")) return null;
+  return "railway";
 }
