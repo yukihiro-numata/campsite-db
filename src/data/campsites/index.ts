@@ -9,6 +9,11 @@ import campsite7 from "./7.ts";
 import campsite8 from "./8.ts";
 import campsite9 from "./9.ts";
 import campsite10 from "./10.ts";
+import campsite11 from "./11.ts";
+import campsite12 from "./12.ts";
+import campsite13 from "./13.ts";
+import campsite14 from "./14.ts";
+import campsite15 from "./15.ts";
 
 export const campsites: Campsite[] = [
   campsite1,
@@ -21,4 +26,9 @@ export const campsites: Campsite[] = [
   campsite8,
   campsite9,
   campsite10,
+  campsite11,
+  campsite12,
+  campsite13,
+  campsite14,
+  campsite15,
 ];
