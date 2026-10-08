@@ -23,6 +23,11 @@ const ZOOM = 16;
 const AROUND = 5;
 const TILE_URL = "https://cyberjapandata.gsi.go.jp/xyz/experimental_bvmap";
 
+// 地図タイルの道路・鉄道の分類コード
+const ROAD_CATEGORY = { nationalRoad: 0, expressway: 3 }; // rdCtg
+const RAILWAY_FEATURE_CODE = 8201; // ftCode(鉄道中心線)
+const ROPEWAY_ROUTE_CODE_PREFIX = "40206"; // rtCode の先頭(索道)
+
 export async function distancesFrom(
   campsite: LatLng,
 ): Promise<CalculatedValues["distanceTo"]> {
@@ -96,20 +101,15 @@ function featuresOf(layer: VectorTileLayer | undefined) {
   return Array.from({ length: layer.length }, (_, i) => layer.feature(i));
 }
 
-/** 道路の種類。rdCtg 0=国道、3=高速道路 */
 function roadKind(props: Record<string, unknown>): Kind | null {
-  if (props.rdCtg === 0) return "nationalRoad";
-  if (props.rdCtg === 3) return "expressway";
+  if (props.rdCtg === ROAD_CATEGORY.nationalRoad) return "nationalRoad";
+  if (props.rdCtg === ROAD_CATEGORY.expressway) return "expressway";
   return null;
 }
 
-/**
- * 鉄道の種類。ftCode 8201=鉄道中心線。ただし rtCode(路線の分類)が 40206 で
- * 始まる線は索道(ロープウェイ)なので除く。宝登山・箱根・榛名山のロープウェイが
- * この分類で、駅の注記で確かめた
- */
+/** 鉄道中心線のうち、索道(ロープウェイ)を除いたもの */
 function railKind(props: Record<string, unknown>): Kind | null {
-  if (props.ftCode !== 8201) return null;
-  if (String(props.rtCode).startsWith("40206")) return null;
+  if (props.ftCode !== RAILWAY_FEATURE_CODE) return null;
+  if (String(props.rtCode).startsWith(ROPEWAY_ROUTE_CODE_PREFIX)) return null;
   return "railway";
 }
