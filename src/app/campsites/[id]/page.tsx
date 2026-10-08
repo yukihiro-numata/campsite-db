@@ -116,6 +116,11 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
           format={(v) => `約${v}分`}
         />
         <FactRow
+          label="標高"
+          fact={c.elevation}
+          format={(v) => `${v.toLocaleString()}m`}
+        />
+        <FactRow
           label="静粛時間"
           fact={c.quietHours}
           format={(v) => `${v.start}〜${v.end ?? ""}`}

@@ -78,6 +78,15 @@ export const campsiteFields: Field<CampsiteTest>[] = [
     })),
   },
   {
+    name: "elevation",
+    label: "標高",
+    options: [500, 800, 1000].map((m) => ({
+      value: String(m),
+      label: `${m.toLocaleString()}m以上`,
+      test: (c) => knownAnd<number>((v) => v >= m)(c.elevation),
+    })),
+  },
+  {
     name: "bath",
     label: "風呂・シャワー",
     options: [

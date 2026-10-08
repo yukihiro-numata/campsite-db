@@ -64,6 +64,8 @@ export type Campsite = {
   prefecture: Fact<string>;
   /** 都心からの所要時間(分) */
   travelMinutes: Fact<number>;
+  /** 代表地点の標高(m) */
+  elevation: Fact<number>;
   /** 静粛時間(HH:MM)。終わりの時刻が書かれていなければ end はない */
   quietHours: Fact<{ start: string; end?: string }>;
   groupPolicy: Fact<GroupPolicy>;
@@ -87,6 +89,8 @@ export type Campsite = {
 /** 計算スクリプトで出す値。キャンプ場ごとに src/data/calculated.ts に書き出す */
 export type CalculatedValues = {
   travelMinutes: number;
+  /** null は標高データがない座標 */
+  elevation: number | null;
   distanceTo: {
     expressway: number | null;
     nationalRoad: number | null;

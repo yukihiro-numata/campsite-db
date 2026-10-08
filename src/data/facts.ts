@@ -27,14 +27,22 @@ const distanceSource = (checkedOn: string): Source => ({
   checkedOn,
 });
 
+const elevationSource = (checkedOn: string, note: string): Source => ({
+  kind: "calculated",
+  url: "https://maps.gsi.go.jp/development/elevation_s.html",
+  note,
+  checkedOn,
+});
+
 /** 計算スクリプトで出した値。計算していないキャンプ場は未調査 */
 export function calculatedFacts(
   id: number,
-): Pick<Campsite, "travelMinutes" | "distanceTo"> {
+): Pick<Campsite, "travelMinutes" | "elevation" | "distanceTo"> {
   const v = calculatedValues[id];
   if (!v) {
     return {
       travelMinutes: unchecked,
+      elevation: unchecked,
       distanceTo: {
         expressway: unchecked,
         nationalRoad: unchecked,
@@ -46,6 +54,21 @@ export function calculatedFacts(
   const distance = distanceSource(calculatedOn);
   return {
     travelMinutes: known(v.travelMinutes, travel),
+    elevation:
+      v.elevation === null
+        ? notStated(
+            elevationSource(
+              calculatedOn,
+              "キャンプ場の座標では、国土地理院の標高 API が値を返さなかった",
+            ),
+          )
+        : known(
+            v.elevation,
+            elevationSource(
+              calculatedOn,
+              "キャンプ場の座標の標高を、国土地理院の標高 API で求めた",
+            ),
+          ),
     distanceTo: {
       expressway: known(v.distanceTo.expressway, distance),
       nationalRoad: known(v.distanceTo.nationalRoad, distance),

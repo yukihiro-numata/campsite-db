@@ -9,6 +9,7 @@ import { writeFileSync } from "node:fs";
 import { campsites } from "../../src/data/campsites/index.ts";
 import type { CalculatedValues, LatLng } from "../../src/data/types.ts";
 import { distancesFrom } from "./distance.ts";
+import { elevation } from "./elevation.ts";
 import { travelMinutes } from "./travel.ts";
 
 const OUTPUT_FILE = "src/data/calculated.ts";
@@ -16,6 +17,7 @@ const OUTPUT_FILE = "src/data/calculated.ts";
 async function calculate(location: LatLng): Promise<CalculatedValues> {
   return {
     travelMinutes: await travelMinutes(location),
+    elevation: await elevation(location),
     distanceTo: await distancesFrom(location),
   };
 }
