@@ -195,6 +195,18 @@ export const campsiteFields: Field<CampsiteTest>[] = [
     options: distanceOptions((c) => c.distanceTo.railway),
   },
   {
+    name: "store",
+    label: "コンビニ・スーパー",
+    options: [1, 3, 5].map((km) => ({
+      value: String(km),
+      label: `${km}km 以内`,
+      test: (c) =>
+        knownAnd<number | null>((v) => v !== null && v <= km * 1000)(
+          c.storeDistance,
+        ),
+    })),
+  },
+  {
     name: "water",
     label: "水辺",
     options: [

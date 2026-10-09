@@ -163,6 +163,13 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
           format={formatDistance}
         />
         <FactRow
+          label="コンビニ・スーパーまで"
+          fact={c.storeDistance}
+          format={(m) =>
+            m === null ? "5km 以内になし" : `約${(m / 1000).toFixed(1)}km`
+          }
+        />
+        <FactRow
           label="地面の種類"
           fact={c.groundTypes}
           format={(v) => v.join("・")}
