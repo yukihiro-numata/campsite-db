@@ -1,7 +1,7 @@
-// キャンプ場の座標から、高速道路・国道・鉄道までの直線距離(m)を計算する。
+// キャンプ場の座標から、高速道路・国道・鉄道・海・湖・川までの直線距離(m)を計算する。
 //
 // 1. キャンプ場のまわりの地図タイルを、国土地理院から取る
-// 2. タイルから高速道路・国道・鉄道の線を取り出す
+// 2. タイルから道路・鉄道・水辺の線を取り出す
 // 3. 種類ごとに、キャンプ場から一番近い線までの距離を測る
 //
 // 地図は国土地理院ベクトルタイル(experimental_bvmap、ズーム 16)。1,500m より遠ければ null
@@ -27,6 +27,9 @@ const TILE_URL = "https://cyberjapandata.gsi.go.jp/xyz/experimental_bvmap";
 const ROAD_CATEGORY = { nationalRoad: 0, expressway: 3 }; // rdCtg
 const RAILWAY_FEATURE_CODE = 8201; // ftCode(鉄道中心線)
 const ROPEWAY_ROUTE_CODE_PREFIX = "40206"; // rtCode の先頭(索道)
+// 地図タイルの水辺の分類コード(ftCode)。川は幅のある川の岸(水涯線)だけで、
+// 細い川の中心線(5301。小川・用水路を含む)は使わない
+const RIVER_BANK_FEATURE_CODES = [5201, 5203];
 
 export async function distancesFrom(
   campsite: LatLng,
@@ -50,6 +53,9 @@ export async function distancesFrom(
     expressway: nearest("expressway"),
     nationalRoad: nearest("nationalRoad"),
     railway: nearest("railway"),
+    sea: nearest("sea"),
+    lake: nearest("lake"),
+    river: nearest("river"),
   };
 }
 
@@ -62,7 +68,7 @@ function tilesAround(campsite: LatLng): [number, number][] {
   );
 }
 
-/** タイルの中の、高速道路・国道・鉄道の線 */
+/** タイルの中の、道路・鉄道・水辺の線 */
 async function linesInTile(x: number, y: number): Promise<Line[]> {
   const res = await fetch(`${TILE_URL}/${ZOOM}/${x}/${y}.pbf`);
   if (res.status === 404) return []; // 海などでタイルがない
@@ -79,6 +85,12 @@ async function linesInTile(x: number, y: number): Promise<Line[]> {
     ...featuresOf(layers.railway).map((f) => ({
       f,
       kind: railKind(f.properties),
+    })),
+    ...featuresOf(layers.coastline).map((f) => ({ f, kind: "sea" as const })),
+    ...featuresOf(layers.lake).map((f) => ({ f, kind: "lake" as const })),
+    ...featuresOf(layers.river).map((f) => ({
+      f,
+      kind: riverKind(f.properties),
     })),
   ].flatMap(({ f, kind }) => {
     if (!kind) return [];
@@ -112,4 +124,10 @@ function railKind(props: Record<string, unknown>): Kind | null {
   if (props.ftCode !== RAILWAY_FEATURE_CODE) return null;
   if (String(props.rtCode).startsWith(ROPEWAY_ROUTE_CODE_PREFIX)) return null;
   return "railway";
+}
+
+function riverKind(props: Record<string, unknown>): Kind | null {
+  return RIVER_BANK_FEATURE_CODES.includes(props.ftCode as number)
+    ? "river"
+    : null;
 }

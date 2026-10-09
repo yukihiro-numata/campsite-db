@@ -33,6 +33,19 @@ const distanceOptions = (
     test: (c) => farFrom(m)(pick(c)),
   }));
 
+const nearWater = (
+  water: "sea" | "lake" | "river",
+  label: string,
+  within: number,
+): Field<CampsiteTest>["options"][number] => ({
+  value: water,
+  label,
+  test: (c) =>
+    knownAnd<number | null>((v) => v !== null && v <= within)(
+      c.distanceTo[water],
+    ),
+});
+
 const isTrue = knownAnd<boolean>((v) => v);
 
 /** データに入っている値を、出てきた順に重複なく並べる */
@@ -180,6 +193,15 @@ export const campsiteFields: Field<CampsiteTest>[] = [
     name: "railway",
     label: "鉄道から",
     options: distanceOptions((c) => c.distanceTo.railway),
+  },
+  {
+    name: "water",
+    label: "水辺",
+    options: [
+      nearWater("sea", "海まで 500m 以内", 500),
+      nearWater("lake", "湖まで 500m 以内", 500),
+      nearWater("river", "川まで 100m 以内", 100),
+    ],
   },
 ];
 

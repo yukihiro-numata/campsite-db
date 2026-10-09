@@ -148,6 +148,21 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
           format={formatDistance}
         />
         <FactRow
+          label="海まで"
+          fact={c.distanceTo.sea}
+          format={formatDistance}
+        />
+        <FactRow
+          label="湖まで"
+          fact={c.distanceTo.lake}
+          format={formatDistance}
+        />
+        <FactRow
+          label="川まで"
+          fact={c.distanceTo.river}
+          format={formatDistance}
+        />
+        <FactRow
           label="地面の種類"
           fact={c.groundTypes}
           format={(v) => v.join("・")}
