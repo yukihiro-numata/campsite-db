@@ -10,6 +10,7 @@ import type {
   Source,
 } from "@/data/types.ts";
 import { findCampsite, listCampsites } from "@/lib/campsites.ts";
+import { CampsiteMap } from "./campsite-map.tsx";
 
 export const dynamicParams = false;
 
@@ -106,6 +107,30 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
   return (
     <main className="mx-auto w-full max-w-2xl p-4">
       <h1 className="text-xl font-semibold">{c.name}</h1>
+
+      <h2 className="mt-6 font-semibold">地図</h2>
+      {c.location.status === "known" ? (
+        <div className="mt-2">
+          <CampsiteMap {...c.location.value} />
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${c.location.value.lat},${c.location.value.lng}`}
+            className="mt-1 inline-block underline"
+          >
+            Google マップで開く
+          </a>
+          <p className="text-xs text-gray-500">
+            座標:{" "}
+            <a href={c.location.source.url} className="underline">
+              {sourceKindLabel[c.location.source.kind]}
+            </a>
+            (調べた日: {c.location.source.checkedOn})
+          </p>
+        </div>
+      ) : (
+        <p className="mt-2">
+          {c.location.status === "notStated" ? "不明" : "未調査"}
+        </p>
+      )}
 
       <h2 className="mt-6 font-semibold">基本情報</h2>
       <dl>
