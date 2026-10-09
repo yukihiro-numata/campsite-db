@@ -34,10 +34,20 @@ const elevationSource = (checkedOn: string, note: string): Source => ({
   checkedOn,
 });
 
+const storeSource = (checkedOn: string): Source => ({
+  kind: "calculated",
+  url: "https://www.openstreetmap.org/copyright",
+  note: "キャンプ場の座標から一番近いコンビニ・スーパーまでの直線距離。OpenStreetMap のデータ(© OpenStreetMap contributors)",
+  checkedOn,
+});
+
 /** 計算スクリプトで出した値。計算していないキャンプ場は未調査 */
 export function calculatedFacts(
   id: number,
-): Pick<Campsite, "travelMinutes" | "elevation" | "distanceTo"> {
+): Pick<
+  Campsite,
+  "travelMinutes" | "elevation" | "distanceTo" | "storeDistance"
+> {
   const v = calculatedValues[id];
   if (!v) {
     return {
@@ -51,6 +61,7 @@ export function calculatedFacts(
         lake: unchecked,
         river: unchecked,
       },
+      storeDistance: unchecked,
     };
   }
   const travel = travelSource(calculatedOn);
@@ -80,5 +91,6 @@ export function calculatedFacts(
       lake: known(v.distanceTo.lake, distance),
       river: known(v.distanceTo.river, distance),
     },
+    storeDistance: known(v.storeDistance, storeSource(calculatedOn)),
   };
 }

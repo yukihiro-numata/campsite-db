@@ -12,5 +12,7 @@ pnpm calc
 - 計算した日は、スクリプトを実行した日を 1 つだけ書き出す(出典の「調べた日」に入る)。
   毎回すべて計算し直すので、地図データの更新で変わった値は PR の差分に出る。
 - `src/data/calculated.ts` は手で直さない。
+- OpenStreetMap のデータから計算した値(所要時間、コンビニ・スーパーまでの距離)は
+  ODbL(https://www.openstreetmap.org/copyright)に従う。
 - 計算を足すときは、`CalculatedValues`(`src/data/types.ts`)と `index.ts` の
   `calculate()`、`src/data/facts.ts` の `calculatedFacts()` に足す。

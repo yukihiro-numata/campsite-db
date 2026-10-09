@@ -10,6 +10,7 @@ import { campsites } from "../../src/data/campsites/index.ts";
 import type { CalculatedValues, LatLng } from "../../src/data/types.ts";
 import { distancesFrom } from "./distance.ts";
 import { elevation } from "./elevation.ts";
+import { storeDistanceFrom } from "./store.ts";
 import { travelMinutes } from "./travel.ts";
 
 const OUTPUT_FILE = "src/data/calculated.ts";
@@ -19,6 +20,7 @@ async function calculate(location: LatLng): Promise<CalculatedValues> {
     travelMinutes: await travelMinutes(location),
     elevation: await elevation(location),
     distanceTo: await distancesFrom(location),
+    storeDistance: await storeDistanceFrom(location),
   };
 }
 

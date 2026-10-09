@@ -15,6 +15,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 57,
     },
+    storeDistance: 762,
   },
   2: {
     travelMinutes: 161,
@@ -27,6 +28,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 208,
     },
+    storeDistance: 1063,
   },
   3: {
     travelMinutes: 67,
@@ -39,6 +41,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 167,
     },
+    storeDistance: 2311,
   },
   4: {
     travelMinutes: 69,
@@ -51,6 +54,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 119,
     },
+    storeDistance: 3125,
   },
   5: {
     travelMinutes: 95,
@@ -63,6 +67,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 573,
     },
+    storeDistance: null,
   },
   6: {
     travelMinutes: 126,
@@ -75,6 +80,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 58,
     },
+    storeDistance: 1252,
   },
   7: {
     travelMinutes: 83,
@@ -87,6 +93,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 164,
     },
+    storeDistance: 536,
   },
   8: {
     travelMinutes: 81,
@@ -99,6 +106,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 130,
     },
+    storeDistance: 337,
   },
   9: {
     travelMinutes: 95,
@@ -111,6 +119,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 55,
     },
+    storeDistance: null,
   },
   10: {
     travelMinutes: 101,
@@ -123,6 +132,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 39,
     },
+    storeDistance: 2707,
   },
   11: {
     travelMinutes: 98,
@@ -135,6 +145,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 67,
     },
+    storeDistance: 1206,
   },
   12: {
     travelMinutes: 69,
@@ -147,6 +158,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 35,
     },
+    storeDistance: 4451,
   },
   13: {
     travelMinutes: 80,
@@ -159,6 +171,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 76,
     },
+    storeDistance: 2538,
   },
   14: {
     travelMinutes: 85,
@@ -171,6 +184,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 45,
     },
+    storeDistance: 1081,
   },
   15: {
     travelMinutes: 86,
@@ -183,6 +197,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 78,
     },
+    storeDistance: null,
   },
   16: {
     travelMinutes: 75,
@@ -195,6 +210,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 396,
     },
+    storeDistance: 1958,
   },
   17: {
     travelMinutes: 68,
@@ -207,6 +223,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 199,
     },
+    storeDistance: 651,
   },
   18: {
     travelMinutes: 101,
@@ -219,6 +236,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: 67,
       river: 160,
     },
+    storeDistance: 2490,
   },
   19: {
     travelMinutes: 78,
@@ -231,6 +249,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 25,
     },
+    storeDistance: 2426,
   },
   20: {
     travelMinutes: 67,
@@ -243,6 +262,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 26,
     },
+    storeDistance: 999,
   },
   21: {
     travelMinutes: 119,
@@ -255,6 +275,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: 270,
       river: 216,
     },
+    storeDistance: 2536,
   },
   22: {
     travelMinutes: 121,
@@ -267,6 +288,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 433,
     },
+    storeDistance: 3426,
   },
   23: {
     travelMinutes: 156,
@@ -279,6 +301,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 295,
     },
+    storeDistance: 1030,
   },
   24: {
     travelMinutes: 105,
@@ -291,6 +314,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 38,
     },
+    storeDistance: null,
   },
   25: {
     travelMinutes: 127,
@@ -303,6 +327,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 901,
     },
+    storeDistance: 3685,
   },
   26: {
     travelMinutes: 120,
@@ -315,6 +340,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 217,
     },
+    storeDistance: 4431,
   },
   27: {
     travelMinutes: 181,
@@ -327,6 +353,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 191,
     },
+    storeDistance: 4879,
   },
   28: {
     travelMinutes: 170,
@@ -339,6 +366,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: 74,
     },
+    storeDistance: null,
   },
   29: {
     travelMinutes: 153,
@@ -351,6 +379,7 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: null,
       river: null,
     },
+    storeDistance: null,
   },
   30: {
     travelMinutes: 129,
@@ -363,5 +392,6 @@ export const calculatedValues: Record<number, CalculatedValues> = {
       lake: 1471,
       river: 637,
     },
+    storeDistance: 3102,
   },
 };

@@ -81,6 +81,8 @@ export type Campsite = {
     /** 幅のある川の岸(細い川・用水路は含まない) */
     river: Fact<number | null>;
   };
+  /** 一番近いコンビニ・スーパーまでの直線距離(m)。null は半径 5km 以内にない */
+  storeDistance: Fact<number | null>;
   groundTypes: Fact<string[]>;
   toiletFeatures: Fact<string[]>;
   totalSites: Fact<number>;
@@ -105,4 +107,5 @@ export type CalculatedValues = {
     lake: number | null;
     river: number | null;
   };
+  storeDistance: number | null;
 };
