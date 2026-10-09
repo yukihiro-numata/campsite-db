@@ -1,4 +1,4 @@
-import { calculatedFacts, known, notStated } from "../facts.ts";
+import { calculatedFacts, known } from "../facts.ts";
 import type { Area, Campsite, Source } from "../types.ts";
 
 // ウッドルーフ奥秩父オートキャンプ場
