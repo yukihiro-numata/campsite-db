@@ -1,0 +1,26 @@
+name: Dependabot auto-merge
+
+# Dependabot のパッチ・マイナー更新の PR に、CI が通ったら squash merge する予約を入れる。
+# メジャー更新は壊れる変更を含むことがあるため、手で判断する。
+# 書き込み権限が要るため pull_request_target で動かす。PR のコードは取り出さず、
+# gh pr merge を呼ぶだけ
+on: pull_request_target
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    steps:
+      - id: metadata
+        uses: dependabot/fetch-metadata@v3
+      - if: >-
+          steps.metadata.outputs.update-type == 'version-update:semver-patch' ||
+          steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
