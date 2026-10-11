@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -9,7 +10,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ja" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col font-sans">
+        <header className="mx-auto w-full max-w-5xl px-5 pt-5">
+          <Link
+            href="/"
+            className="text-[15px] font-extrabold tracking-wide text-forest"
+          >
+            ▲ campsite-db
+          </Link>
+        </header>
+        {children}
+      </body>
     </html>
   );
 }

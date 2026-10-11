@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 生成りの地に森の緑。差し色に赤土色を少しだけ使う */
+@theme {
+  --color-bg: #f5f1e8;
+  --color-card: #fffdf8;
+  --color-ink: #2a2823;
+  --color-muted: #736b5c;
+  --color-line: #e8e1d2;
+  --color-forest: #3e5c3a;
+  --color-forest-soft: #e6ecdc;
+  --color-sand: #ede6d6;
+  --color-clay: #a5522b;
+  /* 日本語の Web フォントは重いので、端末の文字を使う */
+  --font-sans:
+    "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic",
+    system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-bg);
+  color: var(--color-ink);
 }
