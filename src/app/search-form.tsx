@@ -65,7 +65,8 @@ export function SearchForm({
         id="search-form"
         className={`${open ? "fixed inset-0 z-20 overflow-y-auto" : "hidden"} bg-bg lg:sticky lg:top-4 lg:row-span-2 lg:row-start-1 lg:block lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:rounded-3xl`}
       >
-        <Form action="">
+        {/* 条件が今と同じだと URL が変わらず画面も作り直されないので、ここで閉じる */}
+        <Form action="" onSubmit={() => setOpen(false)}>
           <div className="flex items-center justify-between px-5 pt-5 pb-3 lg:px-1 lg:pt-0">
             <h2 className="text-lg font-extrabold">絞り込み</h2>
             <div className="flex gap-4 text-sm">
