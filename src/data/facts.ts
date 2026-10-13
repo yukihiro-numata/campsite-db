@@ -1,8 +1,10 @@
 import { calculatedOn, calculatedValues } from "./calculated.ts";
 import type { Campsite, Fact, Source } from "./types.ts";
 
-export function known<T>(value: T, source: Source): Fact<T> {
-  return { status: "known", value, source };
+export function known<T>(value: T, source: Source, note?: string): Fact<T> {
+  return note === undefined
+    ? { status: "known", value, source }
+    : { status: "known", value, source, note };
 }
 
 /** 不明。調べたが、出典に書かれていなかった */

@@ -79,7 +79,12 @@ export default (() => {
           { min: 95, max: 95, note: "公式の表記は95㎡前後" },
           questions,
         ),
-        carAccess: known("inside", questions),
+        // 「基本的にサイト内にお車の乗り入れが可能です」「一部に車乗り入れのできないサイトがございます」
+        carAccess: known(
+          "inside",
+          questions,
+          "一部に車を乗り入れできないサイトがある",
+        ),
         layout: known("plot", questions2),
         // 電源付きと電源なしの区画がある
         power: known(true, price),

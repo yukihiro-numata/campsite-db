@@ -1,9 +1,10 @@
 "use client";
 
 import Form from "next/form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { FieldView } from "@/lib/filters.ts";
 import { isMatch, type Match } from "@/lib/match.ts";
+import { saveLastSearch } from "./last-search.ts";
 
 // 絞り込みの項目のまとまり。よく使うものを上に置く
 const groups: { title: string; names: string[]; note?: string }[] = [
@@ -40,6 +41,9 @@ export function SearchForm({
 }) {
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState(selected);
+  useEffect(() => {
+    saveLastSearch(new URLSearchParams(selected).toString());
+  }, [selected]);
   const count = matches.filter((m) => isMatch(m, values, siteTypeNames)).length;
   const selectedCount = Object.keys(selected).length;
   const fieldByName = new Map(fields.map((f) => [f.name, f]));
