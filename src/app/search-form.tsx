@@ -51,7 +51,7 @@ export function SearchForm({
         onClick={() => setOpen(true)}
         aria-expanded={open}
         aria-controls="search-form"
-        className="fixed inset-x-4 bottom-5 z-10 flex items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-[15px] font-bold text-white shadow-lg shadow-primary/30 lg:hidden"
+        className="fixed inset-x-4 bottom-5 z-10 flex items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-base font-bold text-white shadow-lg shadow-primary/30 lg:hidden"
       >
         条件で絞り込む
         {selectedCount > 0 && (
@@ -97,13 +97,13 @@ export function SearchForm({
                 key={g.title}
                 // URL で条件を選んでいるまとまりは開いておく
                 open={g.names.some((n) => selected[n])}
-                className="group mx-4 mb-2.5 rounded-2xl border border-line bg-card lg:mx-0"
+                className="group mx-4 mb-3 rounded-2xl border border-line bg-card lg:mx-0"
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3.5 font-bold [&::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-4 font-bold [&::-webkit-details-marker]:hidden">
                   <span>
                     {g.title}
                     {chosen > 0 && (
-                      <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-xs text-white">
+                      <span className="ml-2 rounded-full bg-primary px-2 py-1 text-xs text-white">
                         {chosen}
                       </span>
                     )}
@@ -118,7 +118,7 @@ export function SearchForm({
                       <legend className="mb-2 text-xs text-muted">
                         {f.label}
                       </legend>
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="flex flex-wrap gap-2">
                         {[{ value: "", label: "指定なし" }, ...f.options].map(
                           (o) => (
                             <label key={o.value} className="cursor-pointer">
@@ -136,7 +136,7 @@ export function SearchForm({
                                 className="peer sr-only"
                               />
                               <span
-                                className={`inline-block rounded-full border px-3.5 py-1.5 text-[13px] peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 ${
+                                className={`inline-block rounded-full border px-4 py-2 text-sm peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 ${
                                   // 指定なしは選ばれていても目立たせない
                                   o.value === ""
                                     ? "border-transparent bg-chip text-ink/80 peer-checked:border-primary/50 peer-checked:bg-card peer-checked:text-primary"
@@ -172,7 +172,7 @@ export function SearchForm({
             <button
               type="submit"
               disabled={count === 0}
-              className="w-full rounded-2xl bg-primary py-4 text-[15px] font-bold text-white shadow-lg shadow-primary/30 disabled:bg-muted disabled:shadow-none"
+              className="w-full rounded-2xl bg-primary py-4 text-base font-bold text-white shadow-lg shadow-primary/30 disabled:bg-muted disabled:shadow-none"
             >
               {count === 0
                 ? "条件に合うキャンプ場がありません"
