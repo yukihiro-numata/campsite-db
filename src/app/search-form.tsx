@@ -55,11 +55,11 @@ export function SearchForm({
         onClick={() => setOpen(true)}
         aria-expanded={open}
         aria-controls="search-form"
-        className="fixed inset-x-4 bottom-5 z-10 flex items-center justify-center gap-2 rounded-2xl bg-forest py-4 text-[15px] font-bold text-white shadow-lg shadow-forest/30 lg:hidden"
+        className="fixed inset-x-4 bottom-5 z-10 flex items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-[15px] font-bold text-white shadow-lg shadow-primary/30 lg:hidden"
       >
         条件で絞り込む
         {selectedCount > 0 && (
-          <span className="rounded-full bg-white px-2 text-xs text-forest">
+          <span className="rounded-full bg-white px-2 text-xs text-primary">
             {selectedCount}
           </span>
         )}
@@ -77,7 +77,7 @@ export function SearchForm({
               <button
                 type="button"
                 onClick={() => setValues({})}
-                className="text-forest underline lg:hidden"
+                className="text-primary underline lg:hidden"
               >
                 条件をクリア
               </button>
@@ -107,7 +107,7 @@ export function SearchForm({
                   <span>
                     {g.title}
                     {chosen > 0 && (
-                      <span className="ml-2 rounded-full bg-forest px-2 py-0.5 text-xs text-white">
+                      <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-xs text-white">
                         {chosen}
                       </span>
                     )}
@@ -140,11 +140,11 @@ export function SearchForm({
                                 className="peer sr-only"
                               />
                               <span
-                                className={`inline-block rounded-full border px-3.5 py-1.5 text-[13px] peer-focus-visible:ring-2 peer-focus-visible:ring-forest peer-focus-visible:ring-offset-2 ${
+                                className={`inline-block rounded-full border px-3.5 py-1.5 text-[13px] peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 ${
                                   // 指定なしは選ばれていても目立たせない
                                   o.value === ""
-                                    ? "border-transparent bg-sand text-ink/80 peer-checked:border-forest/50 peer-checked:bg-card peer-checked:text-forest"
-                                    : "border-transparent bg-sand text-ink/80 peer-checked:bg-forest peer-checked:font-semibold peer-checked:text-white"
+                                    ? "border-transparent bg-chip text-ink/80 peer-checked:border-primary/50 peer-checked:bg-card peer-checked:text-primary"
+                                    : "border-transparent bg-chip text-ink/80 peer-checked:bg-primary peer-checked:font-semibold peer-checked:text-white"
                                 }`}
                               >
                                 {o.label}
@@ -176,7 +176,7 @@ export function SearchForm({
             <button
               type="submit"
               disabled={count === 0}
-              className="w-full rounded-2xl bg-forest py-4 text-[15px] font-bold text-white shadow-lg shadow-forest/30 disabled:bg-muted disabled:shadow-none"
+              className="w-full rounded-2xl bg-primary py-4 text-[15px] font-bold text-white shadow-lg shadow-primary/30 disabled:bg-muted disabled:shadow-none"
             >
               {count === 0
                 ? "条件に合うキャンプ場がありません"
