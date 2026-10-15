@@ -1,5 +1,6 @@
 import type { Campsite, Fact, GroupPolicy, SiteType } from "@/data/types.ts";
 import { listCampsites } from "./campsites.ts";
+import { type Match, optionKey } from "./match.ts";
 
 // 絞り込みの条件。値が「不明」「未調査」のものは、条件を満たすと確かめられないため外す。
 
@@ -291,25 +292,30 @@ export function selectedValues(params: SearchParams): Record<string, string> {
   return selected;
 }
 
-function selectedTests<T>(
-  fields: Field<T>[],
-  selected: Record<string, string>,
-): T[] {
-  return fields.flatMap((f) =>
-    f.options.filter((o) => o.value === selected[f.name]).map((o) => o.test),
-  );
-}
+/** 画面に渡す絞り込みの項目。判定の関数を除いた形 */
+export type FieldView = { name: string; label: string; options: Option[] };
 
-export function filterCampsites(
-  campsites: Campsite[],
-  selected: Record<string, string>,
-): Campsite[] {
-  const campsiteTests = selectedTests(campsiteFields, selected);
-  const siteTypeTests = selectedTests(siteTypeFields, selected);
-  return campsites.filter(
-    (c) =>
-      campsiteTests.every((test) => test(c)) &&
-      (siteTypeTests.length === 0 ||
-        c.siteTypes.some((s) => siteTypeTests.every((test) => test(s)))),
-  );
+const toView = <T>(f: Field<T>): FieldView => ({
+  name: f.name,
+  label: f.label,
+  options: f.options.map(({ value, label }) => ({ value, label })),
+});
+
+export const fieldViews: FieldView[] = [
+  ...campsiteFields.map(toView),
+  ...siteTypeFields.map(toView),
+];
+
+export const siteTypeFieldNames = siteTypeFields.map((f) => f.name);
+
+/** キャンプ場が満たす選択肢を調べる */
+export function matchOf(c: Campsite): Match {
+  const satisfied = <S>(fields: Field<(x: S) => boolean>[], x: S) =>
+    fields.flatMap((f) =>
+      f.options.filter((o) => o.test(x)).map((o) => optionKey(f.name, o.value)),
+    );
+  return {
+    campsite: satisfied(campsiteFields, c),
+    siteTypes: c.siteTypes.map((s) => satisfied(siteTypeFields, s)),
+  };
 }

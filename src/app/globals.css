@@ -1,23 +1,32 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 色は使い方で名前を付ける。今の色は、生成りの地に森の緑、差し色に赤土色 */
+@theme {
+  /* ページの背景 */
+  --color-bg: #f5f1e8;
+  /* カード・表の背景 */
+  --color-card: #fffdf8;
+  /* 文字 */
+  --color-ink: #2a2823;
+  /* 補足・ラベルの薄い文字 */
+  --color-muted: #736b5c;
+  /* 区切り線・枠 */
+  --color-line: #e8e1d2;
+  /* 主ボタン・選んだ条件・見出し・リンク */
+  --color-primary: #3e5c3a;
+  /* タグの背景 */
+  --color-primary-soft: #e6ecdc;
+  /* 選んでいない選択肢の背景 */
+  --color-chip: #ede6d6;
+  /* 県名・注記の差し色 */
+  --color-accent: #a5522b;
+  /* 日本語の Web フォントは重いので、端末の文字を使う */
+  --font-sans:
+    "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic",
+    system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-bg);
+  color: var(--color-ink);
 }
