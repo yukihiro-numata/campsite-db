@@ -2,7 +2,10 @@
 
 import "leaflet/dist/leaflet.css";
 import { useEffect, useRef } from "react";
+import { preconnect } from "react-dom";
 import type { LatLng } from "@/data/types.ts";
+
+const tileOrigin = "https://cyberjapandata.gsi.go.jp";
 
 // 国土地理院の地図(地理院タイル)にキャンプ場の位置を出す。
 // Leaflet はブラウザでしか動かないので、表示した後に読み込む
@@ -11,6 +14,8 @@ export function CampsiteMap({
   lng,
   className,
 }: LatLng & { className?: string }) {
+  // Leaflet を読み込むあいだに、タイルの配信元とつないでおく
+  preconnect(tileOrigin);
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,7 +24,7 @@ export function CampsiteMap({
     import("leaflet").then((L) => {
       if (cancelled || !container.current) return;
       map = L.map(container.current).setView([lat, lng], 14);
-      L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", {
+      L.tileLayer(`${tileOrigin}/xyz/std/{z}/{x}/{y}.png`, {
         attribution:
           '<a href="https://maps.gsi.go.jp/development/ichiran.html">地理院タイル</a>',
         maxZoom: 18,
