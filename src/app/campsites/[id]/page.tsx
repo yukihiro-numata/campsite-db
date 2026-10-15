@@ -92,21 +92,17 @@ const row = <T,>(
 // 「不明」と「未調査」は、探す人にとってはどちらも分からない値なので同じに出す
 function Value({ r }: { r: Row }) {
   if (r.text === undefined) {
-    return <span className="text-[13px] text-muted/80">情報なし</span>;
+    return <span className="text-sm text-muted/80">情報なし</span>;
   }
   const note = r.fact.status === "known" ? r.fact.note : undefined;
   return (
     <>
       {r.text}
       {r.sub && (
-        <span className="block text-[11px] font-normal text-muted">
-          {r.sub}
-        </span>
+        <span className="block text-xs font-normal text-muted">{r.sub}</span>
       )}
       {note && (
-        <span className="block text-[11px] font-medium text-accent">
-          {note}
-        </span>
+        <span className="block text-xs font-medium text-accent">{note}</span>
       )}
     </>
   );
@@ -114,13 +110,13 @@ function Value({ r }: { r: Row }) {
 
 function Table({ rows }: { rows: Row[] }) {
   return (
-    <dl className="rounded-[18px] border border-line bg-card px-4">
+    <dl className="rounded-2xl border border-line bg-card px-4">
       {rows.map((r) => (
         <div
           key={r.label}
           className="flex justify-between gap-4 border-b border-line py-3 text-sm last:border-0"
         >
-          <dt className="shrink-0 text-[13px] text-muted">{r.label}</dt>
+          <dt className="shrink-0 text-sm text-muted">{r.label}</dt>
           <dd className="text-right font-semibold">
             <Value r={r} />
           </dd>
@@ -146,13 +142,13 @@ function SiteTypes({ siteTypes }: { siteTypes: SiteType[] }) {
         {siteTypes.map((s) => (
           <section
             key={s.name}
-            className="rounded-[18px] border border-line bg-card px-4 pt-3"
+            className="rounded-2xl border border-line bg-card px-4 pt-3"
           >
             <h3 className="text-sm font-bold">{s.name}</h3>
             <dl className="grid grid-cols-2 gap-x-4 gap-y-2 py-3 text-sm">
               {siteRows(s).map((r) => (
                 <div key={r.label}>
-                  <dt className="text-[11px] text-muted">{r.label}</dt>
+                  <dt className="text-xs text-muted">{r.label}</dt>
                   <dd className="font-semibold">
                     <Value r={r} />
                   </dd>
@@ -163,13 +159,13 @@ function SiteTypes({ siteTypes }: { siteTypes: SiteType[] }) {
         ))}
       </div>
       {/* PC は表 */}
-      <div className="hidden overflow-hidden rounded-[18px] border border-line bg-card md:block">
+      <div className="hidden overflow-hidden rounded-2xl border border-line bg-card md:block">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-line text-left text-xs text-muted">
-              <th className="px-4 py-2.5 font-normal">サイトの種類</th>
+              <th className="px-4 py-3 font-normal">サイトの種類</th>
               {siteRows(siteTypes[0]).map((r) => (
-                <th key={r.label} className="px-3 py-2.5 font-normal">
+                <th key={r.label} className="px-3 py-3 font-normal">
                   {r.label}
                 </th>
               ))}
@@ -201,9 +197,9 @@ const SITE_TYPES_SHOWN = 4;
 
 function Tile({ label, fact }: { label: string; fact: Fact<string> }) {
   return (
-    <div className="rounded-2xl border border-line bg-card px-3 py-2.5 text-[11px] text-muted">
+    <div className="rounded-2xl border border-line bg-card px-3 py-3 text-xs text-muted">
       {label}
-      <b className="mt-0.5 block text-lg font-extrabold text-ink tabular-nums">
+      <b className="mt-1 block text-lg font-extrabold text-ink tabular-nums">
         {fact.status === "known" ? (
           fact.value
         ) : (
@@ -314,7 +310,7 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
               {c.prefecture.value}
             </p>
           )}
-          <h1 className="mt-0.5 text-2xl leading-snug font-extrabold tracking-wide md:text-3xl">
+          <h1 className="mt-1 text-2xl leading-snug font-extrabold tracking-wide md:text-3xl">
             {c.name}
           </h1>
         </div>
@@ -334,9 +330,9 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
           />
         </div>
 
-        <h2 className="mt-7 mb-2 px-1 text-[13px] font-extrabold tracking-wider text-primary">
+        <h2 className="mt-7 mb-2 px-1 text-sm font-extrabold tracking-wider text-primary">
           サイトの種類
-          <span className="ml-1.5 font-semibold text-muted">
+          <span className="ml-2 font-semibold text-muted">
             {c.siteTypes.length}
           </span>
         </h2>
@@ -355,7 +351,7 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
 
         {sections.map((s) => (
           <section key={s.title}>
-            <h2 className="mt-7 mb-2 px-1 text-[13px] font-extrabold tracking-wider text-primary">
+            <h2 className="mt-7 mb-2 px-1 text-sm font-extrabold tracking-wider text-primary">
               {s.title}
             </h2>
             <Table rows={s.rows} />

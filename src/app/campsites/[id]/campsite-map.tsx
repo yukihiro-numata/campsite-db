@@ -25,7 +25,7 @@ export function CampsiteMap({
         maxZoom: 18,
       }).addTo(map);
       L.circleMarker([lat, lng], {
-        radius: 9,
+        radius: 8,
         color: "white",
         weight: 3,
         // 差し色(globals.css の accent)に合わせる
