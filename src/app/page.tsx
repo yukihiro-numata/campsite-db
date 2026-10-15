@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { Card } from "@/components/card.tsx";
+import { Stat } from "@/components/stat.tsx";
 import type { Campsite } from "@/data/types.ts";
 import { listCampsites } from "@/lib/campsites.ts";
 import {
@@ -7,21 +9,26 @@ import {
   selectedValues,
   siteTypeFieldNames,
 } from "@/lib/filters.ts";
+import {
+  carAccessLabel,
+  formatArea,
+  formatElevation,
+  formatFact,
+  formatMinutes,
+} from "@/lib/labels.ts";
 import { isMatch, matchingSiteTypes } from "@/lib/match.ts";
 import { SearchForm } from "./search-form.tsx";
 
-// 値が分からないときに出す
-const NA = "—";
-
 /** サイトの種類の広さを、一番狭いものから一番広いものまでの幅で出す */
-function areaRange(c: Campsite): string {
+function areaRange(c: Campsite): string | undefined {
   const areas = c.siteTypes.flatMap((s) =>
     s.area.status === "known" ? [s.area.value] : [],
   );
-  if (areas.length === 0) return NA;
-  const min = Math.min(...areas.map((a) => a.min));
-  const max = Math.max(...areas.map((a) => a.max));
-  return min === max ? `約${min}㎡` : `${min}〜${max}㎡`;
+  if (areas.length === 0) return undefined;
+  return formatArea({
+    min: Math.min(...areas.map((a) => a.min)),
+    max: Math.max(...areas.map((a) => a.max)),
+  });
 }
 
 /** 一覧に出す短いタグ。分かっていて、あると嬉しいものだけ出す */
@@ -33,9 +40,9 @@ function tags(c: Campsite): string[] {
   );
   return [
     car.has("inside")
-      ? "区画内に駐車"
+      ? carAccessLabel.inside
       : car.has("front")
-        ? "区画の前に駐車"
+        ? carAccessLabel.front
         : undefined,
     c.quietHours.status === "known"
       ? `静粛 ${c.quietHours.value.start}`
@@ -44,15 +51,6 @@ function tags(c: Campsite): string[] {
       ? { bath: "風呂", shower: "シャワー", none: undefined }[c.bathing.value]
       : undefined,
   ].filter((t) => t !== undefined);
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="text-xs text-muted">
-      {label}
-      <b className="block text-base font-bold text-ink tabular-nums">{value}</b>
-    </div>
-  );
 }
 
 export default async function Home({ searchParams }: PageProps<"/">) {
@@ -129,58 +127,49 @@ export default async function Home({ searchParams }: PageProps<"/">) {
         <ul className="mt-3 space-y-3">
           {results.map(({ c, siteTypes }) => (
             <li key={c.id}>
-              <Link
-                href={`/campsites/${c.id}`}
-                className="block rounded-2xl border border-line bg-card p-4 transition hover:border-primary/40"
-              >
-                {c.prefecture.status === "known" && (
-                  <p className="text-xs font-bold tracking-wider text-accent">
-                    {c.prefecture.value}
-                  </p>
-                )}
-                <h2 className="mt-1 text-lg leading-snug font-extrabold">
-                  {c.name}
-                </h2>
-                <div className="mt-2 flex gap-5">
-                  <Stat
-                    label="所要時間"
-                    value={
-                      c.travelMinutes.status === "known"
-                        ? `約${c.travelMinutes.value}分`
-                        : NA
-                    }
-                  />
-                  <Stat
-                    label="標高"
-                    value={
-                      c.elevation.status === "known"
-                        ? `${c.elevation.value.toLocaleString("ja-JP")}m`
-                        : NA
-                    }
-                  />
-                  <Stat label="広さ" value={areaRange(c)} />
-                </div>
-                {tags(c).length > 0 && (
-                  <ul className="mt-3 flex flex-wrap gap-1">
-                    {tags(c).map((t) => (
-                      <li
-                        key={t}
-                        className="rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold text-primary"
-                      >
-                        {t}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {siteTypes && siteTypes.length > 0 && (
-                  <p className="mt-3 border-t border-dashed border-line pt-2 text-xs text-muted">
-                    条件に合うサイト:{" "}
-                    <b className="font-semibold text-ink">
-                      {c.siteTypes[siteTypes[0]].name}
-                    </b>
-                    {siteTypes.length > 1 && ` ほか ${siteTypes.length - 1}`}
-                  </p>
-                )}
+              <Link href={`/campsites/${c.id}`} className="group block">
+                <Card className="p-4 transition group-hover:border-primary/40">
+                  {c.prefecture.status === "known" && (
+                    <p className="text-xs font-bold tracking-wider text-accent">
+                      {c.prefecture.value}
+                    </p>
+                  )}
+                  <h2 className="mt-1 text-lg leading-snug font-extrabold">
+                    {c.name}
+                  </h2>
+                  <div className="mt-2 flex gap-5">
+                    <Stat
+                      label="所要時間"
+                      value={formatFact(c.travelMinutes, formatMinutes)}
+                    />
+                    <Stat
+                      label="標高"
+                      value={formatFact(c.elevation, formatElevation)}
+                    />
+                    <Stat label="広さ" value={areaRange(c)} />
+                  </div>
+                  {tags(c).length > 0 && (
+                    <ul className="mt-3 flex flex-wrap gap-1">
+                      {tags(c).map((t) => (
+                        <li
+                          key={t}
+                          className="rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold text-primary"
+                        >
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {siteTypes && siteTypes.length > 0 && (
+                    <p className="mt-3 border-t border-dashed border-line pt-2 text-xs text-muted">
+                      条件に合うサイト:{" "}
+                      <b className="font-semibold text-ink">
+                        {c.siteTypes[siteTypes[0]].name}
+                      </b>
+                      {siteTypes.length > 1 && ` ほか ${siteTypes.length - 1}`}
+                    </p>
+                  )}
+                </Card>
               </Link>
             </li>
           ))}

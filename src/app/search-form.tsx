@@ -2,6 +2,7 @@
 
 import Form from "next/form";
 import { useEffect, useState } from "react";
+import { Card } from "@/components/card.tsx";
 import type { FieldView } from "@/lib/filters.ts";
 import { isMatch, type Match } from "@/lib/match.ts";
 import { saveLastSearch } from "./last-search.ts";
@@ -97,67 +98,68 @@ export function SearchForm({
             );
             const chosen = groupFields.filter((f) => values[f.name]).length;
             return (
-              <details
-                key={g.title}
-                // URL で条件を選んでいるまとまりは開いておく
-                open={g.names.some((n) => selected[n])}
-                className="group mx-4 mb-3 rounded-2xl border border-line bg-card lg:mx-0"
-              >
-                <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-4 font-bold [&::-webkit-details-marker]:hidden">
-                  <span>
-                    {g.title}
-                    {chosen > 0 && (
-                      <span className="ml-2 rounded-full bg-primary px-2 py-1 text-xs text-white">
-                        {chosen}
-                      </span>
-                    )}
-                  </span>
-                  <span className="text-xs text-muted transition group-open:rotate-180">
-                    ▼
-                  </span>
-                </summary>
-                <div className="space-y-3 px-4 pb-4">
-                  {groupFields.map((f) => (
-                    <fieldset key={f.name}>
-                      <legend className="mb-2 text-xs text-muted">
-                        {f.label}
-                      </legend>
-                      <div className="flex flex-wrap gap-2">
-                        {[{ value: "", label: "指定なし" }, ...f.options].map(
-                          (o) => (
-                            <label key={o.value} className="cursor-pointer">
-                              {/* 選択肢そのものは送らず、下の hidden で選んだ条件だけを送る。
+              <Card key={g.title} className="mx-4 mb-3 lg:mx-0">
+                <details
+                  // URL で条件を選んでいるまとまりは開いておく
+                  open={g.names.some((n) => selected[n])}
+                  className="group"
+                >
+                  <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-4 font-bold [&::-webkit-details-marker]:hidden">
+                    <span>
+                      {g.title}
+                      {chosen > 0 && (
+                        <span className="ml-2 rounded-full bg-primary px-2 py-1 text-xs text-white">
+                          {chosen}
+                        </span>
+                      )}
+                    </span>
+                    <span className="text-xs text-muted transition group-open:rotate-180">
+                      ▼
+                    </span>
+                  </summary>
+                  <div className="space-y-3 px-4 pb-4">
+                    {groupFields.map((f) => (
+                      <fieldset key={f.name}>
+                        <legend className="mb-2 text-xs text-muted">
+                          {f.label}
+                        </legend>
+                        <div className="flex flex-wrap gap-2">
+                          {[{ value: "", label: "指定なし" }, ...f.options].map(
+                            (o) => (
+                              <label key={o.value} className="cursor-pointer">
+                                {/* 選択肢そのものは送らず、下の hidden で選んだ条件だけを送る。
                                   form をどのフォームにも属さない名前にして、送る対象から外す */}
-                              <input
-                                type="radio"
-                                form="no-submit"
-                                name={f.name}
-                                value={o.value}
-                                checked={(values[f.name] ?? "") === o.value}
-                                onChange={() =>
-                                  setValues({ ...values, [f.name]: o.value })
-                                }
-                                className="peer sr-only"
-                              />
-                              <span
-                                className={`inline-block rounded-full border px-4 py-2 text-sm peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 ${
-                                  // 指定なしは選ばれていても目立たせない
-                                  o.value === ""
-                                    ? "border-transparent bg-chip text-ink/80 peer-checked:border-primary/50 peer-checked:bg-card peer-checked:text-primary"
-                                    : "border-transparent bg-chip text-ink/80 peer-checked:bg-primary peer-checked:font-semibold peer-checked:text-white"
-                                }`}
-                              >
-                                {o.label}
-                              </span>
-                            </label>
-                          ),
-                        )}
-                      </div>
-                    </fieldset>
-                  ))}
-                  {g.note && <p className="text-xs text-muted">{g.note}</p>}
-                </div>
-              </details>
+                                <input
+                                  type="radio"
+                                  form="no-submit"
+                                  name={f.name}
+                                  value={o.value}
+                                  checked={(values[f.name] ?? "") === o.value}
+                                  onChange={() =>
+                                    setValues({ ...values, [f.name]: o.value })
+                                  }
+                                  className="peer sr-only"
+                                />
+                                <span
+                                  className={`inline-block rounded-full border px-4 py-2 text-sm peer-focus-visible:ring-2 peer-focus-visible:ring-primary peer-focus-visible:ring-offset-2 ${
+                                    // 指定なしは選ばれていても目立たせない
+                                    o.value === ""
+                                      ? "border-transparent bg-chip text-ink/80 peer-checked:border-primary/50 peer-checked:bg-card peer-checked:text-primary"
+                                      : "border-transparent bg-chip text-ink/80 peer-checked:bg-primary peer-checked:font-semibold peer-checked:text-white"
+                                  }`}
+                                >
+                                  {o.label}
+                                </span>
+                              </label>
+                            ),
+                          )}
+                        </div>
+                      </fieldset>
+                    ))}
+                    {g.note && <p className="text-xs text-muted">{g.note}</p>}
+                  </div>
+                </details>
+              </Card>
             );
           })}
 
