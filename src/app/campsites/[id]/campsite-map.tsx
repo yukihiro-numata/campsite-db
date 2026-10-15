@@ -6,7 +6,11 @@ import type { LatLng } from "@/data/types.ts";
 
 // 国土地理院の地図(地理院タイル)にキャンプ場の位置を出す。
 // Leaflet はブラウザでしか動かないので、表示した後に読み込む
-export function CampsiteMap({ lat, lng }: LatLng) {
+export function CampsiteMap({
+  lat,
+  lng,
+  className,
+}: LatLng & { className?: string }) {
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -20,7 +24,16 @@ export function CampsiteMap({ lat, lng }: LatLng) {
           '<a href="https://maps.gsi.go.jp/development/ichiran.html">地理院タイル</a>',
         maxZoom: 18,
       }).addTo(map);
-      L.circleMarker([lat, lng], { radius: 8 }).addTo(map);
+      L.circleMarker([lat, lng], {
+        radius: 8,
+        color: "white",
+        weight: 3,
+        // 差し色(globals.css の accent)に合わせる
+        fillColor: getComputedStyle(container.current).getPropertyValue(
+          "--color-accent",
+        ),
+        fillOpacity: 1,
+      }).addTo(map);
     });
     return () => {
       cancelled = true;
@@ -28,5 +41,5 @@ export function CampsiteMap({ lat, lng }: LatLng) {
     };
   }, [lat, lng]);
 
-  return <div ref={container} className="h-72 w-full" />;
+  return <div ref={container} className={className} />;
 }

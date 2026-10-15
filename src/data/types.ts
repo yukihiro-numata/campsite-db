@@ -17,7 +17,13 @@ export type Source = {
  * unchecked: 未調査。まだ調べていない
  */
 export type Fact<T> =
-  | { status: "known"; value: T; source: Source }
+  | {
+      status: "known";
+      value: T;
+      source: Source;
+      /** 値に付ける注記。例外があるときなど(例: 一部に乗り入れできないサイトがある) */
+      note?: string;
+    }
   | { status: "notStated"; source: Source }
   | { status: "unchecked" };
 
