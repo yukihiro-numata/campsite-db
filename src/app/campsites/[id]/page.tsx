@@ -104,7 +104,9 @@ function Value({ r }: { r: Row }) {
         </span>
       )}
       {note && (
-        <span className="block text-[11px] font-medium text-clay">{note}</span>
+        <span className="block text-[11px] font-medium text-accent">
+          {note}
+        </span>
       )}
     </>
   );
@@ -287,7 +289,7 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
   return (
     <main className="mx-auto w-full max-w-3xl pb-16 md:px-4">
       <div className="px-5 pt-3 pb-3 md:px-1">
-        <BackLink className="text-sm font-semibold text-forest" />
+        <BackLink className="text-sm font-semibold text-primary" />
       </div>
 
       {c.location.status === "known" && (
@@ -298,7 +300,7 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
           />
           <a
             href={`https://www.google.com/maps/search/?api=1&query=${c.location.value.lat},${c.location.value.lng}`}
-            className="mt-2 inline-block px-5 text-xs text-forest underline md:px-1"
+            className="mt-2 inline-block px-5 text-xs text-primary underline md:px-1"
           >
             Google マップで開く
           </a>
@@ -308,7 +310,7 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
       <div className="px-4 md:px-0">
         <div className="px-1 pt-4">
           {c.prefecture.status === "known" && (
-            <p className="text-xs font-bold tracking-wider text-clay">
+            <p className="text-xs font-bold tracking-wider text-accent">
               {c.prefecture.value}
             </p>
           )}
@@ -332,7 +334,7 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
           />
         </div>
 
-        <h2 className="mt-7 mb-2 px-1 text-[13px] font-extrabold tracking-wider text-forest">
+        <h2 className="mt-7 mb-2 px-1 text-[13px] font-extrabold tracking-wider text-primary">
           サイトの種類
           <span className="ml-1.5 font-semibold text-muted">
             {c.siteTypes.length}
@@ -341,7 +343,7 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
         <SiteTypes siteTypes={shown} />
         {rest.length > 0 && (
           <details className="group mt-2">
-            <summary className="cursor-pointer list-none px-1 py-2 text-sm font-semibold text-forest [&::-webkit-details-marker]:hidden">
+            <summary className="cursor-pointer list-none px-1 py-2 text-sm font-semibold text-primary [&::-webkit-details-marker]:hidden">
               <span className="group-open:hidden">
                 ほかの {rest.length} 種類を見る ▼
               </span>
@@ -353,7 +355,7 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
 
         {sections.map((s) => (
           <section key={s.title}>
-            <h2 className="mt-7 mb-2 px-1 text-[13px] font-extrabold tracking-wider text-forest">
+            <h2 className="mt-7 mb-2 px-1 text-[13px] font-extrabold tracking-wider text-primary">
               {s.title}
             </h2>
             <Table rows={s.rows} />
@@ -361,7 +363,7 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
         ))}
 
         <details className="group mt-7">
-          <summary className="cursor-pointer list-none px-1 text-sm font-semibold text-forest [&::-webkit-details-marker]:hidden">
+          <summary className="cursor-pointer list-none px-1 text-sm font-semibold text-primary [&::-webkit-details-marker]:hidden">
             出典を見る
             <span className="ml-1 inline-block text-xs transition group-open:rotate-180">
               ▼
@@ -372,7 +374,7 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
               <li key={sourceKey(source)}>
                 <a
                   href={source.url}
-                  className="font-semibold break-all text-forest underline"
+                  className="font-semibold break-all text-primary underline"
                 >
                   {sourceKindLabel[source.kind]}
                 </a>

@@ -26,9 +26,12 @@ export function CampsiteMap({
       }).addTo(map);
       L.circleMarker([lat, lng], {
         radius: 9,
-        color: "#fff",
+        color: "white",
         weight: 3,
-        fillColor: "#a5522b",
+        // 差し色(globals.css の accent)に合わせる
+        fillColor: getComputedStyle(container.current).getPropertyValue(
+          "--color-accent",
+        ),
         fillOpacity: 1,
       }).addTo(map);
     });
