@@ -108,7 +108,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             <span className="ml-0.5 text-sm font-semibold text-muted">件</span>
           </p>
           {chosen.length > 0 && (
-            <Link href="/" className="text-sm text-forest underline">
+            <Link href="/" className="text-sm text-primary underline">
               条件をクリア
             </Link>
           )}
@@ -118,7 +118,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             {chosen.map((s) => (
               <li
                 key={s.field}
-                className="rounded-full bg-forest-soft px-2.5 py-1 text-xs font-semibold text-forest"
+                className="rounded-full bg-primary-soft px-2.5 py-1 text-xs font-semibold text-primary"
               >
                 <span className="font-normal">{s.field}</span> {s.option}
               </li>
@@ -131,10 +131,10 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             <li key={c.id}>
               <Link
                 href={`/campsites/${c.id}`}
-                className="block rounded-[20px] border border-line bg-card p-4 transition hover:border-forest/40"
+                className="block rounded-[20px] border border-line bg-card p-4 transition hover:border-primary/40"
               >
                 {c.prefecture.status === "known" && (
-                  <p className="text-[11px] font-bold tracking-wider text-clay">
+                  <p className="text-[11px] font-bold tracking-wider text-accent">
                     {c.prefecture.value}
                   </p>
                 )}
@@ -165,7 +165,7 @@ export default async function Home({ searchParams }: PageProps<"/">) {
                     {tags(c).map((t) => (
                       <li
                         key={t}
-                        className="rounded-full bg-forest-soft px-2.5 py-0.5 text-xs font-semibold text-forest"
+                        className="rounded-full bg-primary-soft px-2.5 py-0.5 text-xs font-semibold text-primary"
                       >
                         {t}
                       </li>

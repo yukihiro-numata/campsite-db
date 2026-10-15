@@ -14,7 +14,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <header className="mx-auto w-full max-w-5xl px-5 pt-5">
           <Link
             href="/"
-            className="text-[15px] font-extrabold tracking-wide text-forest"
+            className="text-[15px] font-extrabold tracking-wide text-primary"
           >
             ▲ campsite-db
           </Link>

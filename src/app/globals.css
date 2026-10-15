@@ -1,16 +1,25 @@
 @import "tailwindcss";
 
-/* 生成りの地に森の緑。差し色に赤土色を少しだけ使う */
+/* 色は使い方で名前を付ける。今の色は、生成りの地に森の緑、差し色に赤土色 */
 @theme {
+  /* ページの背景 */
   --color-bg: #f5f1e8;
+  /* カード・表の背景 */
   --color-card: #fffdf8;
+  /* 文字 */
   --color-ink: #2a2823;
+  /* 補足・ラベルの薄い文字 */
   --color-muted: #736b5c;
+  /* 区切り線・枠 */
   --color-line: #e8e1d2;
-  --color-forest: #3e5c3a;
-  --color-forest-soft: #e6ecdc;
-  --color-sand: #ede6d6;
-  --color-clay: #a5522b;
+  /* 主ボタン・選んだ条件・見出し・リンク */
+  --color-primary: #3e5c3a;
+  /* タグの背景 */
+  --color-primary-soft: #e6ecdc;
+  /* 選んでいない選択肢の背景 */
+  --color-chip: #ede6d6;
+  /* 県名・注記の差し色 */
+  --color-accent: #a5522b;
   /* 日本語の Web フォントは重いので、端末の文字を使う */
   --font-sans:
     "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic",
