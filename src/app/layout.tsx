@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { siteDescription, siteName, siteUrl, tagline } from "@/lib/site.ts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "campsite-db",
-  description: "キャンプ場のスペック検索・比較サービス",
+  metadataBase: siteUrl,
+  title: {
+    default: `${siteName} | ${tagline}`,
+    template: `%s | ${siteName}`,
+  },
+  description: siteDescription,
+  openGraph: {
+    siteName,
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -16,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             href="/"
             className="text-base font-extrabold tracking-wide text-primary"
           >
-            ▲ campsite-db
+            ▲ {siteName}
           </Link>
         </header>
         {children}
