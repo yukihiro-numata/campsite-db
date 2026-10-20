@@ -10,3 +10,9 @@ export const siteDescription =
 
 /** 本番の URL。共有したときの画像などを絶対 URL にするのに使う */
 export const siteUrl = new URL("https://campsite-db.vercel.app");
+
+/**
+ * ページの背景色(globals.css の bg と同じ値)。ホーム画面から開いたときの
+ * 起動画面やスマホの上の帯の色に使う。CSS の外なので @theme の名前は使えない
+ */
+export const backgroundColor = "#f5f1e8";
