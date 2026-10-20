@@ -1,6 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
-import { siteDescription, siteName, siteUrl, tagline } from "@/lib/site.ts";
+import {
+  backgroundColor,
+  siteDescription,
+  siteName,
+  siteUrl,
+  tagline,
+} from "@/lib/site.ts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,6 +22,10 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: { card: "summary_large_image" },
+};
+
+export const viewport: Viewport = {
+  themeColor: backgroundColor,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
