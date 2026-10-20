@@ -35,7 +35,17 @@ export async function generateMetadata({
   params,
 }: PageProps<"/campsites/[id]">): Promise<Metadata> {
   const { id } = await params;
-  return { title: getCampsite(id).name };
+  const c = getCampsite(id);
+  const facts = [
+    formatFact(c.prefecture, (v) => v),
+    formatFact(c.travelMinutes, (v) => `都心から${formatMinutes(v)}`),
+    formatFact(c.elevation, (v) => `標高 ${formatElevation(v)}`),
+  ].filter((f) => f !== undefined);
+  const description = `${c.name}(${facts.join("・")})の区画の広さ・静かさ・設備を、出典付きでまとめています。`;
+  return {
+    title: c.name,
+    description,
+  };
 }
 
 // サイトの種類が多いキャンプ場は、最初のいくつかだけ出して残りは開いて見る
