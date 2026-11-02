@@ -16,12 +16,12 @@
   },
   "dependencies": {
     "leaflet": "1.9.4",
-    "next": "16.4.2",
+    "next": "16.4.3",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.15",
+    "@biomejs/biome": "2.6.4",
     "@mapbox/tilebelt": "2.0.3",
     "@mapbox/vector-tile": "3.0.0",
     "@tailwindcss/postcss": "4.3.3",
