@@ -25,6 +25,7 @@ export default (() => {
   return {
     id: 22,
     name: "ほったらかしキャンプ場",
+    officialUrl: "https://hottarakashicamp.com/",
     // アクセスページの Google マップの座標
     location: known({ lat: 35.7086604, lng: 138.6483679 }, access),
     prefecture: known("山梨県", access),

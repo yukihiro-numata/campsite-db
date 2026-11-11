@@ -34,6 +34,7 @@ export default (() => {
   return {
     id: 30,
     name: "榛名湖オートキャンプ場",
+    officialUrl: "https://www.harunakocamp.jp/",
     // アクセスページに地図がないため、周辺施設の地図(メニューからはリンクが外れている)の
     // 「榛名湖オートキャンプ場」の座標を使う。予約サイトの座標とほぼ同じ
     location: known({ lat: 36.479535, lng: 138.889096 }, map),

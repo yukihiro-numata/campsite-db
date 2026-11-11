@@ -45,6 +45,7 @@ export default (() => {
   return {
     id: 29,
     name: "トントゥなんもく村キャンプ場",
+    officialUrl: "https://kashi-kiri.jp/nanmoku-camp/home",
     // 公式のアクセスの欄は住所だけで地図がないため、予約サイトの座標を使う
     location: known({ lat: 36.1514818, lng: 138.601416 }, nap),
     prefecture: known("群馬県", home),

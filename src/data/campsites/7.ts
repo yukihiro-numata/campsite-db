@@ -28,6 +28,7 @@ export default (() => {
   return {
     id: 7,
     name: "フォレストサンズ長瀞",
+    officialUrl: "https://forestsons.jp/",
     location: known(
       { lat: 36.109857, lng: 139.11394 },
       {

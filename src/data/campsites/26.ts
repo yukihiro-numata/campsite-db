@@ -41,6 +41,7 @@ export default (() => {
   return {
     id: 26,
     name: "赤城山オートキャンプ場",
+    officialUrl: "https://autocamp-akagi.com/",
     // アクセスページの地図の !2d/!3d は表示範囲の中心で、ピンから約 60m 離れているため、
     // 同じ地図の埋め込みページにあるピン(赤城山オートキャンプ場)の座標を使う
     location: known({ lat: 36.4824767, lng: 139.1807545 }, access),

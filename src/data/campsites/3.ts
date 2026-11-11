@@ -52,6 +52,7 @@ export default (() => {
   return {
     id: 3,
     name: "有野実苑オートキャンプ場",
+    officialUrl: "https://arinomi.co.jp/",
     location: known(
       { lat: 35.674576, lng: 140.381809 },
       {

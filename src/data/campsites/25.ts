@@ -43,6 +43,7 @@ export default (() => {
   return {
     id: 25,
     name: "おいしいキャンプ場",
+    officialUrl: "https://oic-camp.com/",
     // 交通案内(Google マップ)のページの地図の座標
     location: known(
       { lat: 35.404275580259906, lng: 138.6062046152513 },

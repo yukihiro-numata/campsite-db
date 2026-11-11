@@ -58,6 +58,7 @@ export default (() => {
   return {
     id: 12,
     name: "オートキャンプ・フルーツ村",
+    officialUrl: "http://www.fruitsvillage.com/",
     // アクセスページの地図(img/sp-google-map-1.js)のマーカーの座標。予約サイトの座標ともほぼ同じ
     location: known({ lat: 35.201798, lng: 140.019319 }, access),
     prefecture: known("千葉県", access),

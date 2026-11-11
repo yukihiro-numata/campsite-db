@@ -38,6 +38,7 @@ export default (() => {
   return {
     id: 1,
     name: "リバーサイド長瀞オートキャンプ場",
+    officialUrl: "https://www.nagatoro-camp.com/",
     location: known(
       { lat: 36.105016, lng: 139.114251 },
       {

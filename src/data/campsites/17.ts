@@ -40,6 +40,7 @@ export default (() => {
   return {
     id: 17,
     name: "PICAさがみ湖",
+    officialUrl: "https://www.pica-resort.jp/sagamiko/",
     location: known({ lat: 35.60431, lng: 139.207862 }, access),
     prefecture: known("神奈川県", access),
     ...calculatedFacts(17),

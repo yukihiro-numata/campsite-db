@@ -43,6 +43,7 @@ export default (() => {
   return {
     id: 14,
     name: "橘ふれあい公園キャンプ場",
+    officialUrl: "https://www.tachibana-park.jp/facility-guide/camp/",
     // トップページの地図の座標。公園の住所を指す
     location: known(
       { lat: 35.8101401, lng: 140.587747 },

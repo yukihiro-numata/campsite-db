@@ -43,6 +43,7 @@ export default (() => {
   return {
     id: 27,
     name: "無印良品カンパーニャ嬬恋キャンプ場",
+    officialUrl: "https://camp.muji.com/tsumagoi/",
     // アクセスページの地図の !2d/!3d は表示範囲の中心で、ピンから約 250m 離れているため、
     // 同じ地図の埋め込みページにあるピンの座標を使う。予約サイトの座標とも同じ
     location: known({ lat: 36.541217, lng: 138.476947 }, access),

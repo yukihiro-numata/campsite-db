@@ -65,6 +65,11 @@ export type LatLng = { lat: number; lng: number };
 export type Campsite = {
   id: number;
   name: string;
+  /**
+   * 公式サイトの入口のページ。牧場や公園などの一部になっているキャンプ場は、
+   * その中のキャンプ場のページ
+   */
+  officialUrl: string;
   location: Fact<LatLng>;
   /** 都道府県(公式の住所から) */
   prefecture: Fact<string>;

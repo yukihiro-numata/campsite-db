@@ -48,6 +48,7 @@ export default (() => {
   return {
     id: 11,
     name: "キャンプマナビス",
+    officialUrl: "https://campmanavis.com/",
     location: known({ lat: 34.915808, lng: 139.827755 }, access),
     prefecture: known("千葉県", access),
     ...calculatedFacts(11),
