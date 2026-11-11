@@ -1,7 +1,7 @@
 import type { Campsite } from "@/data/types.ts";
 import type { SearchParams } from "./filters.ts";
 
-// 一覧の並び順。選ばなければデータの順(登録順)のまま。
+// 一覧の並び順。選ばなければデータの順のまま。
 
 type SortOption = {
   /** URL のクエリ sort の値 */
@@ -22,7 +22,7 @@ const sortOptions: SortOption[] = [
 
 /** 画面に出す並び順の選択肢。value が空のものはデータの順 */
 export const sortViews = [
-  { value: "", label: "登録順" },
+  { value: "", label: "指定なし" },
   ...sortOptions.map(({ value, label }) => ({ value, label })),
 ];
 
