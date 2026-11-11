@@ -33,6 +33,7 @@ export default (() => {
   return {
     id: 23,
     name: "清里中央オートキャンプ場",
+    officialUrl: "https://autocamp.co.jp/",
     // アクセスページの地図の !2d/!3d は表示範囲の中心(トップページの地図とは経度が違う)のため、
     // 同じ地図の埋め込みページにあるピンの座標を使う。予約サイトの座標との差は約 60m
     location: known({ lat: 35.898926, lng: 138.449011 }, access),

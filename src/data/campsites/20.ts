@@ -28,6 +28,7 @@ export default (() => {
   return {
     id: 20,
     name: "スターフォレストキャンプ葉山",
+    officialUrl: "https://www.hayama-rvsite.info/",
     // トップページの地図のピンの座標。予約サイトの座標も同じ
     location: known({ lat: 35.2664512, lng: 139.6027842 }, top),
     prefecture: known("神奈川県", top),

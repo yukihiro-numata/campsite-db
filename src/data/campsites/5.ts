@@ -25,6 +25,7 @@ export default (() => {
   return {
     id: 5,
     name: "ウェルキャンプ西丹沢",
+    officialUrl: "https://well-camp.com/",
     location: known(
       { lat: 35.47223, lng: 139.061948 },
       {

@@ -161,6 +161,13 @@ export default async function Page({ params }: PageProps<"/campsites/[id]">) {
           ))}
         </div>
 
+        <a
+          href={c.officialUrl}
+          className="mt-3 block rounded-2xl bg-primary py-4 text-center text-base font-bold text-white shadow-lg shadow-primary/30"
+        >
+          公式サイトを見る
+        </a>
+
         <h2 className="mt-7 mb-2 px-1 text-sm font-extrabold tracking-wider text-primary">
           サイトの種類
           <span className="ml-2 font-semibold text-muted">

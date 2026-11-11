@@ -33,6 +33,7 @@ export default (() => {
   return {
     id: 18,
     name: "芦ノ湖キャンプ村",
+    officialUrl: "https://campmura.com/",
     // アクセスページの 1 つ目の地図(ピンは「Fun Space芦ノ湖キャンプ村 レイクサイドヴィラ」)の座標
     location: known({ lat: 35.2394175, lng: 138.9889389 }, access),
     prefecture: known("神奈川県", access),

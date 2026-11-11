@@ -38,6 +38,7 @@ export default (() => {
   return {
     id: 9,
     name: "ケニーズ・ファミリー・ビレッジ",
+    officialUrl: "https://www.kfv.co.jp/",
     // 公式のアクセスページの地図の座標は表示範囲の中心で、キャンプ場から数 km
     // 離れているため、予約サイトの座標を使う
     location: known({ lat: 35.8798907, lng: 139.1830578 }, nap),

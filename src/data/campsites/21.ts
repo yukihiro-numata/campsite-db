@@ -47,6 +47,7 @@ export default (() => {
   return {
     id: 21,
     name: "PICA富士西湖",
+    officialUrl: "https://www.pica-resort.jp/saiko/",
     // 地図の埋め込みの座標。同じページの住所に添えた「東経138°40′39″北緯35°29′26″」
     // とは約 500m ずれる
     location: known({ lat: 35.494441, lng: 138.675462 }, access),

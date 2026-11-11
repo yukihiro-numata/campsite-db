@@ -23,6 +23,7 @@ export default (() => {
   return {
     id: 15,
     name: "勝浦つるんつるん温泉直営オートキャンプ場",
+    officialUrl: "http://katuuraonsen.com/camp/camp.html",
     // 公式のアクセスページに地図がないため、予約サイトの座標を使う
     location: known({ lat: 35.2037625, lng: 140.280768 }, nap),
     prefecture: known("千葉県", {

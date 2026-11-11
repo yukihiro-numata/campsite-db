@@ -38,6 +38,7 @@ export default (() => {
   return {
     id: 16,
     name: "The CLIFF CAMP & BBQ",
+    officialUrl: "https://www.the-cliff.jp/",
     // トップページのアクセスの地図(The CLIFF CAMP&BBQ)の座標
     location: known({ lat: 35.19194616869935, lng: 139.60586348261265 }, top),
     prefecture: known("神奈川県", top),

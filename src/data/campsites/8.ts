@@ -42,6 +42,7 @@ export default (() => {
   return {
     id: 8,
     name: "長瀞キャンプヴィレッジ",
+    officialUrl: "https://www.nagatoro-campvillage.com/",
     location: known({ lat: 36.127513, lng: 139.121129 }, access),
     prefecture: known("埼玉県", access),
     ...calculatedFacts(8),

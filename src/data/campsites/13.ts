@@ -23,6 +23,7 @@ export default (() => {
   return {
     id: 13,
     name: "THE FARM 農園のなかのキャンプ場",
+    officialUrl: "https://www.thefarm.jp/stay/campsite/",
     // 公式のアクセスページの地図の座標は表示範囲の中心で、地図のピン(THE FARM)から
     // 約 300m 離れているため、予約サイトの座標を使う。予約サイトの座標も
     // キャンプ場ではなく THE FARM 全体を指す

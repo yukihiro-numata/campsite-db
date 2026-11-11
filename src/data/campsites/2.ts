@@ -46,6 +46,7 @@ export default (() => {
   return {
     id: 2,
     name: "北軽井沢スウィートグラス",
+    officialUrl: "https://sweetgrass.jp/",
     location: known({ lat: 36.459958, lng: 138.576395 }, nap),
     prefecture: known("群馬県", tent2),
     ...calculatedFacts(2),

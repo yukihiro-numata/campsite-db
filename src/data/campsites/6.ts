@@ -44,6 +44,7 @@ export default (() => {
   return {
     id: 6,
     name: "ウッドルーフ奥秩父オートキャンプ場",
+    officialUrl: "https://www.woodroof.jp/",
     location: known(
       { lat: 35.944867, lng: 138.9255093 },
       {

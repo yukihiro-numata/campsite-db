@@ -23,6 +23,7 @@ export default (() => {
   return {
     id: 10,
     name: "PICA秩父",
+    officialUrl: "https://www.pica-resort.jp/chichibu/",
     // 地図の座標はフロントのあたりを指す。テントサイトはフロントから約 600m 離れた
     // ミューズパーク内の芝生広場にある
     location: known({ lat: 35.98772, lng: 139.045995 }, access),
