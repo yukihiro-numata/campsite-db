@@ -17,6 +17,7 @@ import {
   formatMinutes,
 } from "@/lib/labels.ts";
 import { isMatch, matchingSiteTypes } from "@/lib/match.ts";
+import { selectedSort, sortBy, sortViews } from "@/lib/sort.ts";
 import { SearchForm } from "./search-form.tsx";
 
 /** サイトの種類の広さを、一番狭いものから一番広いものまでの幅で出す */
@@ -54,23 +55,36 @@ function tags(c: Campsite): string[] {
 }
 
 export default async function Home({ searchParams }: PageProps<"/">) {
-  const selected = selectedValues(await searchParams);
+  const params = await searchParams;
+  const selected = selectedValues(params);
+  const sort = selectedSort(params);
   const campsites = listCampsites();
   const matches = campsites.map(matchOf);
-  const results = campsites.flatMap((c, i) =>
-    isMatch(matches[i], selected, siteTypeFieldNames)
-      ? [
-          {
-            c,
-            siteTypes: matchingSiteTypes(
-              matches[i],
-              selected,
-              siteTypeFieldNames,
-            ),
-          },
-        ]
-      : [],
+  const results = sortBy(
+    campsites.flatMap((c, i) =>
+      isMatch(matches[i], selected, siteTypeFieldNames)
+        ? [
+            {
+              c,
+              siteTypes: matchingSiteTypes(
+                matches[i],
+                selected,
+                siteTypeFieldNames,
+              ),
+            },
+          ]
+        : [],
+    ),
+    sort,
+    (r) => r.c,
   );
+  const hrefOf = (conditions: Record<string, string>, sortValue: string) => {
+    const query = new URLSearchParams({
+      ...conditions,
+      ...(sortValue && { sort: sortValue }),
+    }).toString();
+    return query ? `/?${query}` : "/";
+  };
   const chosen = fieldViews.flatMap((f) =>
     f.options
       .filter((o) => o.value === selected[f.name])
@@ -92,11 +106,12 @@ export default async function Home({ searchParams }: PageProps<"/">) {
 
       {/* 条件が変わったら、選択を URL に合わせ直す */}
       <SearchForm
-        key={JSON.stringify(selected)}
+        key={JSON.stringify([selected, sort])}
         fields={fieldViews}
         matches={matches}
         siteTypeNames={siteTypeFieldNames}
         selected={selected}
+        sort={sort}
       />
 
       <section className="lg:col-start-2">
@@ -106,7 +121,11 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             <span className="ml-1 text-sm font-semibold text-muted">件</span>
           </p>
           {chosen.length > 0 && (
-            <Link href="/" className="text-sm text-primary underline">
+            // 条件だけを外し、並び順は保つ
+            <Link
+              href={hrefOf({}, sort)}
+              className="text-sm text-primary underline"
+            >
               条件をクリア
             </Link>
           )}
@@ -123,6 +142,25 @@ export default async function Home({ searchParams }: PageProps<"/">) {
             ))}
           </ul>
         )}
+
+        <nav
+          aria-label="並び順"
+          className="mt-3 flex flex-wrap items-center gap-2 px-1 text-sm"
+        >
+          <span className="text-xs text-muted">並び順</span>
+          {sortViews.map((o) => (
+            <Link
+              key={o.value}
+              href={hrefOf(selected, o.value)}
+              // 一覧の上で押すので、押したあとも同じ位置に留める
+              scroll={false}
+              aria-current={o.value === sort ? "true" : undefined}
+              className="rounded-full bg-chip px-4 py-2 text-ink/80 aria-[current]:bg-primary aria-[current]:font-semibold aria-[current]:text-white"
+            >
+              {o.label}
+            </Link>
+          ))}
+        </nav>
 
         <ul className="mt-3 space-y-3">
           {results.map(({ c, siteTypes }) => (
