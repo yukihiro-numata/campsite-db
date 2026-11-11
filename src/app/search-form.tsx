@@ -32,6 +32,7 @@ export function SearchForm({
   matches,
   siteTypeNames,
   selected,
+  sort,
 }: {
   fields: FieldView[];
   /** キャンプ場ごとの満たす選択肢。押す前に件数を出すのに使う */
@@ -39,12 +40,16 @@ export function SearchForm({
   siteTypeNames: string[];
   /** URL で選ばれている条件 */
   selected: Record<string, string>;
+  /** URL で選ばれている並び順。絞り込み直しても保つ */
+  sort: string;
 }) {
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState(selected);
   useEffect(() => {
-    saveLastSearch(new URLSearchParams(selected).toString());
-  }, [selected]);
+    saveLastSearch(
+      new URLSearchParams({ ...selected, ...(sort && { sort }) }).toString(),
+    );
+  }, [selected, sort]);
   const count = matches.filter((m) => isMatch(m, values, siteTypeNames)).length;
   const selectedCount = Object.keys(selected).length;
   const fieldByName = new Map(fields.map((f) => [f.name, f]));
@@ -173,6 +178,8 @@ export function SearchForm({
                 <input key={name} type="hidden" name={name} value={value} />
               ),
           )}
+
+          {sort && <input type="hidden" name="sort" value={sort} />}
 
           <div className="sticky bottom-0 bg-gradient-to-t from-bg from-70% px-4 pt-6 pb-5 lg:px-0">
             <button
